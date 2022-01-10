@@ -2,6 +2,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import api from "../../api/api";
 import Alert from "../alerts/alert";
+import LinearProgressLoad from "../alerts/LinearProgress";
 
 
 function CategoryDetails(props) {
@@ -18,6 +19,8 @@ function CategoryDetails(props) {
 
     const [alertType, setAlertType] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
+    const [loadingProgress, setLoadingProgress] = useState(false);
+
 
     const handleAlertClose = () => {
         setOpen(false);
@@ -40,6 +43,8 @@ function CategoryDetails(props) {
             setAlertMessage('Category name field is mandatory')
             setAlertType('error')
         } else {
+            setLoadingProgress(true)
+
             const state = {
                 ecategory_name: category_name,
                 ecategory_description: category_notes,
@@ -65,6 +70,8 @@ function CategoryDetails(props) {
         }
         )
             .then(function (response) {
+                setLoadingProgress(false)
+
                 // console.log(response.data)
                 if (response.data.error == false) {
 
@@ -85,6 +92,8 @@ function CategoryDetails(props) {
 
             })
             .catch(function (error) {
+                setLoadingProgress(false)
+
                 console.log(error);
                 setAlertType('error')
                 setAlertMessage("Error 500: Internal server error")
@@ -92,6 +101,15 @@ function CategoryDetails(props) {
             });
     }
 
+    const loading = () => {
+        if (loadingProgress) {
+            return (
+                <div className="mb-3">
+                    <LinearProgressLoad />
+                </div>
+            )
+        }
+    }
 
     return (
         <div>
@@ -121,6 +139,7 @@ function CategoryDetails(props) {
                     <div className="col">
                         <div className="card">
                             <div className="container-fluid mt-5">
+                                {loading()}
                                 <form onSubmit={updateCategory}>
 
                                     <input type="hidden" value={category.id} required />

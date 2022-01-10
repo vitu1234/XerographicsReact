@@ -18,8 +18,6 @@ function AddProduct() {
 
     const [loadingProgress, setLoadingProgress] = useState(false);
 
-
-
     const handleAlertClose = () => {
         setOpen(false);
         setAlertMessage('')
@@ -118,7 +116,7 @@ function AddProduct() {
         )
             .then(function (response) {
                 // console.log(response.data)
-                if (response.data.error == false) {
+                if (response.data.error === false) {
 
                     console.log(response.data.users)
                     // return response.data.users;
@@ -158,7 +156,7 @@ function AddProduct() {
             .then(function (response) {
                 setLoadingProgress(false)
                 // console.log(response.data)
-                if (response.data.error == false) {
+                if (response.data.error === false) {
 
                     // console.log(response.data.users)
                     setBranches(response.data.branches)

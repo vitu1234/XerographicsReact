@@ -175,13 +175,14 @@ function Brands() {
                                 <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                     <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
                                         <li className="breadcrumb-item"><Link to={"/"}><i className="fas fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item " aria-current="page"><Link to={"/products"}>Products</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Brands</li>
                                     </ol>
                                 </nav>
                             </div>
                             <div className="col-lg-6 col-5 text-right">
 
-                                <Link to={'products/product_brands/AddProductBrand'} >
+                                <Link to={'/products/product_brands/AddProductBrand'} >
                                     <button type="button" className="btn btn-sm btn-neutral my-1">New Brand</button>
                                 </Link>
 

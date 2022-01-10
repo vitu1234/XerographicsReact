@@ -122,7 +122,7 @@ Route::put('/updateProduct', ['App\Http\Controllers\ProductController', 'update'
 //all product brands control
 Route::resource('brands', 'App\Http\Controllers\ProductBrandController');
 //get all product brands
-Route::get('/fetchAllProductBrands', ['App\Http\Controllers\ProductBrandController', 'fetchAllProductBrands'])->name('fetchAllProductBrands');
+Route::get('/fetchAllBrands', ['App\Http\Controllers\ProductBrandController', 'fetchAllProductBrands'])->name('fetchAllProductBrands');
 // add product brand
 Route::post('/saveBrand', ['App\Http\Controllers\ProductBrandController', 'store'])->name('saveBrand');
 // delete product brand

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductBrand;
 use Illuminate\Http\Request;
+use DB;
+
 
 class ProductBrandController extends Controller
 {
@@ -15,7 +17,7 @@ class ProductBrandController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
     public function index()
     {
@@ -28,56 +30,30 @@ class ProductBrandController extends Controller
 
              // handle fetch all product brands ajax request
    public function fetchAllProductBrands() {
-        // echo "df";
-     $productbrands = ProductBrand::all();
-     $output = '';
+       $products_brand = DB::connection('mysql')->select(
+           'SELECT *
+                    FROM products_brand'
+       );
 
-     if ($productbrands->count() > 0) {
-        $output .= '<table class="table align-items-center table-flush table-hover mt-3" id="units_tbl">
-        <thead class="thead-light">
-        <tr>
-        <th scope="col">Brand Name</th>
-        <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody class="list">';
-        foreach ($productbrands as $productbrand) {
-            $brand_id = $productbrand->id;
+       if (!empty($products_brand)) {
+           $data = array(
+               'status'=>200,
+               'error' => false,
+               'message' => 'success',
+               'brands' => $products_brand,
+           );
 
-            $output.='
+           return response()->json($data, 200);
+       } else {
+           $data = array(
+               'status'=>200,
+               'error' => true,
+               'message' => 'No product brands found!',
+           );
 
-            <tr>
-            <th scope="row">
-            <div class="media align-items-center">
-            <div class="media-body">
-            <span class="name mb-0 text-sm"> '.$productbrand->brand_name.'</span>
-            </div>
-            </div>
-            </th>
+           return response()->json($data, 200);
+       }
 
-            <td class="text-right">
-            <div class="dropdown">
-            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-ellipsis-v"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-            <a href="#" id="'.$productbrand->id.'" class="text-primary dropdown-item editIconBrand" data-toggle="modal" data-target="#editbrandModal">Edit</a>
-
-            <a href="" id="delBtn'.$productbrand->id.'" onclick="deleteBrand(\''.$productbrand->id.'\',\''.$productbrand->brand_name.'\')"  class="dropdown-item text-danger">Delete</a>
-
-            </div>
-            </div>
-            </td>
-            </tr>
-
-            ';
-        }
-        $output .= '</tbody>
-        </table>';
-        echo $output;
-    } else {
-        echo '<h1 class="text-center text-danger my-5">No record present in the database!</h1>';
-    }
 }
 
     /**
@@ -102,17 +78,41 @@ class ProductBrandController extends Controller
         //create post
         $brand = new ProductBrand;
         $brand->brand_name = $request->input('brand_name');
-        
 
-        if ($brand->save()) {
-            return response()->json([
-                'status' => 200,
-            ]);
+        //check if brand name already exists
+        $checkBrandName = DB::connection('mysql')->select(
+            'SELECT 
+                    *FROM products_brand
+              WHERE brand_name =:brand_name
+                    ',[
+                'brand_name' => $request->input('brand_name')
+            ]
+        );
+
+        if (empty($checkBrandName)){
+            if ($brand->save()) {
+                return response()->json([
+                    'status'=>200,
+                    'error' => false,
+                    'message' => 'Product Brand saved',
+                ]);
+            }else{
+                return response()->json([
+                    'status'=>500,
+                    'error' => true,
+                    'message' => 'Internal server error, product saving failed',
+                ]);
+            }
         }else{
             return response()->json([
-                'status' => 500,
+                'status'=>500,
+                'error' => true,
+                'message' => 'Brand name already exists, saving failed',
             ]);
         }
+
+
+
     }
 
     /**
@@ -126,7 +126,7 @@ class ProductBrandController extends Controller
         $id = $request->id;
         $brand = ProductBrand::find($id);
 
-        
+
         $output = '
         
 
@@ -175,17 +175,20 @@ class ProductBrandController extends Controller
         $id = $request->input('ebrand_id');
         $brand = ProductBrand::find($id);
         $brand->brand_name = $request->input('ebrand_name');
-        
+
 
         if ($brand->save()) {
 
             return response()->json([
-                'status' => 200,
-                'message'=>"saved"
+                'status'=>200,
+                'error' => false,
+                'message' => 'Brand name updated',
             ]);
         }else{
             return response()->json([
-                'status' => 500,
+                'status'=>500,
+                'error' => true,
+                'message' => 'Brand name, saving failed',
             ]);
         }
     }
@@ -199,16 +202,30 @@ class ProductBrandController extends Controller
     public function destroy($id)
     {
         $brand = ProductBrand::find($id);
-        
-        if ($brand->delete()) {
-            
-            return response()->json([
-                'status' => 200,
-            ]);
+
+        if (!empty($brand)){
+            if ($brand->delete()) {
+
+                return response()->json([
+                    'status'=>200,
+                    'error' => false,
+                    'message' => 'Brand name deleted',
+                ]);
+            }else{
+                return response()->json([
+                    'status'=>500,
+                    'error' => true,
+                    'message' => 'Internal server error, Brand name deleting failed',
+                ]);
+            }
         }else{
             return response()->json([
-                'status' => 500,
+                'status'=>500,
+                'error' => true,
+                'message' => 'Internal server error, resource not failed',
             ]);
         }
+
+
     }
 }

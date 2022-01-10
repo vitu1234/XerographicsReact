@@ -73,7 +73,7 @@ function AddBrand(props) {
                     setAlertType('success')
                     setAlertMessage(response.data.message)
                     setOpen(true)
-                    setTimeout(() => { navigate('products/product_brands'); }, 1000)
+                    setTimeout(() => { navigate('/products/product_brands'); }, 1000)
 
                 } else {
                     // console.log(response.data.message)

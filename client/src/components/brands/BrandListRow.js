@@ -19,7 +19,7 @@ const BrandListRow = (props) => {
                         <i className="fas fa-ellipsis-h"></i>
                     </a>
                     <div className="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                        <Link to={'products/product_brands/editProductBrand' + brand.id}
+                        <Link to={'/products/product_brands/editProductBrand/' + brand.id}
                             state={{ brand: brand }}
                             className="text-primary dropdown-item editIcon" >Edit</Link>
 
