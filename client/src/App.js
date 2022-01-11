@@ -27,7 +27,8 @@ import ProductDetails from './components/products/ProductDetails';
 
 import Brands from './components/brands/Brands';
 import AddBrand from './components/brands/AddBrand';
-import BrandDetails from './components/branches/BranchDetails';
+import BrandDetails from './components/brands/BrandDetails';
+import Pos from './components/pos/Pos';
 
 function App() {
 
@@ -84,6 +85,10 @@ function App() {
             <Route path='/products/product_brands' element={<Brands />} />
             <Route path='/products/product_brands/AddProductBrand' element={<AddBrand />} />
             <Route path='/products/product_brands/editProductBrand/:id' element={<BrandDetails />} />
+
+            {/* Point of Sale */}
+            <Route path='/pos' element={<Pos />} />
+
 
 
           </Routes>

@@ -2,6 +2,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import api from "../../api/api";
 import Alert from "../alerts/alert";
+import LinearProgressLoad from "../alerts/LinearProgress";
 
 
 function AddCategory(props) {
@@ -16,6 +17,8 @@ function AddCategory(props) {
 
     const [alertType, setAlertType] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
+    const [loadingProgress, setLoadingProgress] = useState(false);
+
 
     const handleAlertClose = () => {
         setOpen(false);
@@ -36,6 +39,8 @@ function AddCategory(props) {
             setAlertMessage('Category field is mandatory')
             setAlertType('error')
         } else {
+            setLoadingProgress(true)
+
             const state = {
                 category_name: category_name,
                 category_description: category_notes
@@ -60,6 +65,8 @@ function AddCategory(props) {
         }
         )
             .then(function (response) {
+                setLoadingProgress(false)
+
                 // console.log(response.data)
                 if (response.data.error == false) {
 
@@ -80,13 +87,23 @@ function AddCategory(props) {
 
             })
             .catch(function (error) {
+                setLoadingProgress(false)
+
                 console.log(error);
                 setAlertType('error')
                 setAlertMessage("Error 500: Internal server error")
                 setOpen(true)
             });
     }
-
+    const loading = () => {
+        if (loadingProgress) {
+            return (
+                <div className="mb-3">
+                    <LinearProgressLoad />
+                </div>
+            )
+        }
+    }
 
     return (
         <div>
@@ -116,6 +133,7 @@ function AddCategory(props) {
                     <div className="col">
                         <div className="card">
                             <div className="container-fluid mt-5">
+                                {loading()}
                                 <form onSubmit={addCategory}>
 
 

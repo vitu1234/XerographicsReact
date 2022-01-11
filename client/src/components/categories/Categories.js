@@ -5,6 +5,7 @@ import CategoryListRow from "./CategoryListRow";
 import api from "../../api/api";
 import Alert from "../alerts/alert";
 import Dialogs from "../alerts/dialog";
+import LinearProgressLoad from "../alerts/LinearProgress";
 
 
 function Categories() {
@@ -16,6 +17,7 @@ function Categories() {
     const [open, setOpen] = useState(false);
     //dialog state
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [loadingProgress, setLoadingProgress] = useState(false);
 
 
     //dialog open
@@ -50,6 +52,8 @@ function Categories() {
 
     // retrieve categories
     const retrieveCategories = () => {
+        setLoadingProgress(true)
+
         api.get('/fetchAllCategories'
             , {
                 headers: {
@@ -59,6 +63,8 @@ function Categories() {
             }
         )
             .then(function (response) {
+                setLoadingProgress(false)
+
                 // console.log(response.data)
                 if (response.data.error === false) {
 
@@ -76,6 +82,8 @@ function Categories() {
 
             })
             .catch(function (error) {
+                setLoadingProgress(false)
+
                 setAlertType('error')
                 setAlertMessage("Error 500: Internal server error")
                 setOpen(true)
@@ -87,6 +95,8 @@ function Categories() {
         setOpen(false)
         setId(-1)
         if (del_id > 0) {
+            setLoadingProgress(true)
+
             console.log("ID: " + del_id);
             api.delete('/deleteCategory/' + del_id + ''
                 , {
@@ -98,8 +108,8 @@ function Categories() {
             )
                 .then(function (response) {
                     // console.log(response.data)
+                    setLoadingProgress(false)
                     if (response.data.error === false) {
-
                         const categoriesCopy = categories.filter((category) => {
                             return category.id !== del_id
                         })
@@ -120,6 +130,7 @@ function Categories() {
 
                 })
                 .catch(function (myJson) {
+                    setLoadingProgress(false)
                     console.log(myJson);
                     setAlertType('error')
                     setAlertMessage("Error 500: Internal server error")
@@ -140,6 +151,17 @@ function Categories() {
             <CategoryListRow key={category.id} category={category} getDeleteCategoryId={handleClickOpen} ></CategoryListRow>
         );
     })
+
+    const loading = () => {
+        if (loadingProgress) {
+            return (
+                <div className="mb-3">
+                    <LinearProgressLoad />
+                </div>
+            )
+        }
+    }
+
 
     return (
         <div className="">
@@ -173,7 +195,7 @@ function Categories() {
                 <div className="row">
                     <div className="col">
                         <div className="card">
-
+                            {loading()}
                             <div className="table-responsive mt-4" id="">
                                 <table className="table table-hover mt-3 " id="users_tbl" >
                                     <thead className="thead">

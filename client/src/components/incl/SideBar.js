@@ -68,10 +68,10 @@ function SideBar() {
                             </li>
 
                             <li className="nav-item">
-                                <a className="nav-link " href="/pos">
-                                    <i className="ni ni-support-16 text-default"></i>
+                                <Link className="nav-link " to={'/pos'}>
+                                    <i className="ni ni-single-02 text-orange"></i>
                                     <span className="nav-link-text">POS</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="nav-item">
