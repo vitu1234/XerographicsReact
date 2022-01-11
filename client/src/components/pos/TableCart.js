@@ -55,6 +55,22 @@ function TableCart(props) {
         return result;
     }
 
+    const pages = () => {
+        if (cartItems.length >= 10) {
+            return (
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 50, 100]}
+                    component="div"
+                    count={cartItems.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            )
+        }
+    }
+
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -96,15 +112,7 @@ function TableCart(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 50, 100]}
-                component="div"
-                count={cartItems.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
+            {pages()}
         </Paper>
     );
 }
