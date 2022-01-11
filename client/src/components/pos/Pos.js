@@ -114,20 +114,13 @@ function Pos() {
 
     //remove product from cart
     const handleDeleteFromCart = (id) => {
-        console.log(id + ' Deletinuug... Len: ' + cartItems.length)
-        for (var i = 0; i < cartItems.length; i++) {
-            if (cartItems[i].product_id === id) {
-                console.log(' equal ' + cartItems[i].product_id)
 
-                const cartCopy = cartItems.splice(i, 1)//remove item
+        const cartCopy = cartItems.filter((cartItem) => {
+            // console.log(cartItem.product_id + " sjsj")
+            return cartItem.product_id !== id
+        })
+        setCartItem(cartCopy);
 
-                setCartItem(cartCopy);
-                console.log(cartCopy)
-
-            } else {
-                console.log('not equal')
-            }
-        }
     }
 
     const Item = styled(Paper)(({ theme }) => ({
