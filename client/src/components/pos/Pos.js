@@ -20,20 +20,25 @@ import Typography from '@mui/material/Typography';
 
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
-import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
-import QrCodeScannerTwoToneIcon from '@mui/icons-material/QrCodeScannerTwoTone';
-import SearchIcon from '@mui/icons-material/Search';
+
 
 import TableCart from "./TableCart";
+import Button from '@mui/material/Button';
+import Search from "./Search";
+import ProductsLeft from "./ProductsLeft";
+
 
 
 function Pos() {
     //user state
     const [products, setProducts] = useState([])
+    const [search_results, setSearchResults] = useState([])
+    const [product_categories, setProductsCategories] = useState([])
     const [del_id, setId] = useState(-1)
+    // const [searchTerm, setSearchTerm] = useState('')
     const [cartItems, setCartItem] = useState([])
+    let products_url = 'fetchAllProducts';
 
 
     //alert state
@@ -41,17 +46,23 @@ function Pos() {
     //dialog state
     const [dialogOpen, setDialogOpen] = useState(false);
     const [loadingProgress, setLoadingProgress] = useState(false);
-    const [value, setValue] = React.useState('one');
+    const [value, setValue] = useState(-1);
     const [alertType, setAlertType] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
 
     const [dialogTitle, setDialogTitle] = useState("");
     const [dialogMessage, setDialogMessage] = useState("");
-
     const [productCartId, setCartProductId] = React.useState(-1);
 
     const handleChangeTab = (event, newValue) => {
-        setValue(newValue);
+        if (newValue === -1) {
+            products_url = 'fetchAllProducts'
+        } else {
+            products_url = 'fetchAllPosProducts/' + newValue
+        }
+
+        setValue(newValue)
+        retrieveProducts()
     };
 
 
@@ -149,7 +160,7 @@ function Pos() {
     const retrieveProducts = () => {
         setLoadingProgress(true)
 
-        api.get('/fetchAllProducts'
+        api.get(products_url
             , {
                 headers: {
                     'Content-Type': 'application/json',
@@ -169,6 +180,7 @@ function Pos() {
                 } else {
                     // console.log(response.data.message)
                     // return [];
+                    setProducts([])
                     setAlertType('error')
                     setAlertMessage(response.data.message)
                     setOpen(true)
@@ -184,16 +196,51 @@ function Pos() {
             });
     }
 
+    // retrieve products categories
+    const retrieveProductsCategories = () => {
+        setLoadingProgress(true)
+
+        api.get('/fetchAllCategories'
+            , {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }
+        )
+            .then(function (response) {
+                if (response.data.error === false) {
+
+                    // console.log(response.data.users)
+                    setProductsCategories(response.data.categories)
+
+                } else {
+                    // console.log(response.data.message)
+                    // return [];
+                    setAlertType('error')
+                    setAlertMessage(response.data.message)
+                    setOpen(true)
+                }
+
+            })
+            .catch(function (error) {
+                setLoadingProgress(false)
+
+                setAlertType('error')
+                setAlertMessage("Error 500: Internal server error on categories")
+                setOpen(true)
+            });
+    }
+
     //delete category
     const dialogAction = () => {
 
 
     }
 
-    useEffect(() => {
-        console.log(api)
-        retrieveProducts();
-    }, [])
+
+
+
 
 
     const loading = () => {
@@ -206,9 +253,15 @@ function Pos() {
         }
     }
 
-    const renderProductList = products.map((product) => {
+    // const renderProductList = products.map((product) => {
+    //     return (
+    //         <ProductCard addToCartProductId={handleClickAddCart} key={`d${product.id}`} product={product} ></ProductCard>
+    //     );
+    // })
+
+    const renderProductCategoryList = product_categories.map((product_category) => {
         return (
-            <ProductCard addToCartProductId={handleClickAddCart} key={`d${product.id}`} product={product} ></ProductCard>
+            <Tab key={product_category.id} value={product_category.id} label={product_category.category_name} />
         );
     })
 
@@ -222,6 +275,31 @@ function Pos() {
         },
     }));
 
+    // const handleSearch = (searchText) => {
+    //     const productsOG = products;
+    //     // setSearchTerm(searchText)
+    //     console.log(searchText)
+    //     // if (searchTerm !== "") {
+
+    //     //     const productsCopy = products.filter((product) => {
+    //     //         return Object.values(product)
+    //     //             .join(" ")
+    //     //             .toLowerCase()
+    //     //             .includes(searchTerm.toLowerCase());
+    //     //     });
+    //     //     console.log(productsCopy)
+    //     //     // setSearchResults(productsCopy);
+    //     // } else {
+    //     //     setSearchResults(products);
+    //     // }
+
+    //     setSearchResults(searchText);
+    // }
+
+    useEffect(() => {
+        retrieveProductsCategories();
+        retrieveProducts();
+    }, [])
 
     return (
         <div className="">
@@ -262,7 +340,7 @@ function Pos() {
 
 
                                     <Grid item xs={16} sm={16} md={10} lg={10}>
-                                        <Item>
+                                        <Item >
                                             <Box sx={{ width: '100%' }}>
                                                 <Tabs
                                                     value={value}
@@ -276,38 +354,15 @@ function Pos() {
                                                     allowScrollButtonsMobile
                                                     aria-label="scrollable force tabs example"
                                                 >
-                                                    <Tab value="one" label="All" />
-                                                    <Tab value="two" label="Item One" />
-                                                    <Tab value="three" label="Item Two" />
-                                                    <Tab value="5" label="Item Three" />
+                                                    <Tab key="2S" value={-1} label="All" />
+                                                    {renderProductCategoryList}
                                                 </Tabs>
                                             </Box>
 
-                                            <Paper
-                                                component="form"
-                                                sx={{ p: '2px 4px', mt: '20px', display: 'flex', alignItems: 'center', width: '100%' }}
-                                            >
-                                                <IconButton sx={{ p: '10px' }} aria-label="menu">
-                                                    <SearchIcon />
-                                                </IconButton>
-                                                <InputBase
-                                                    sx={{ ml: 1, flex: 1 }}
-                                                    placeholder="Search for an item"
-                                                    inputProps={{ 'aria-label': 'Search for an item' }}
-                                                />
+                                            {/* <Search getSearchValue={handleSearch} /> */}
 
-                                                <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
-                                                    <QrCodeScannerTwoToneIcon />
-                                                </IconButton>
-                                            </Paper>
-
-
-                                            <Grid container >
-                                                {renderProductList}
-                                            </Grid>
-
-
-
+                                            {/* {renderProductList} */}
+                                            <ProductsLeft products={products} addToCartProductId={handleClickAddCart} />
 
                                         </Item>
                                     </Grid>
@@ -322,6 +377,16 @@ function Pos() {
                                                     </StyledBadge>
                                                 </IconButton>
                                             </Typography>
+                                            <Grid container spacing={2} columns={16} sx={{ mb: '30px', mt: '10px' }}>
+                                                <Grid item xs={16} sm={16} md={8} lg={8}>
+                                                    <Button style={{ width: "100%" }} variant="outlined">Existing Customer ID</Button>
+
+                                                </Grid>
+                                                <Grid item xs={16} sm={16} md={8} lg={8}>
+                                                    <Button style={{ width: "100%" }} variant="outlined">New Customer</Button>
+
+                                                </Grid>
+                                            </Grid>
                                             <TableCart cartItems={cartItems} handleClickAddCart={handleClickAddCart} getDeleteProductIdFromCart={handleDeleteFromCart} />
                                         </Item>
                                     </Grid>
