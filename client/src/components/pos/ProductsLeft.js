@@ -1,22 +1,22 @@
 import ProductCard from './ProductCard'
 import Grid from '@mui/material/Grid';
 import Search from './Search';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import React from "react";
+import Alert from '@mui/material/Alert';
+
 
 
 function ProductsLeft(props) {
     // const products = props.products;
     // const search_results = props.search_results;
 
-    const [searchTerm, setSearchTerm] = useState('')
     const [message, setMessage] = useState('')
     const [products, setProducts] = useState(props.products)
     const [search_results, setSearchResults] = useState([])
 
 
     const handleSearch = (searchText) => {
-        setSearchTerm(searchText)
         if (searchText !== "") {
             // const productsCopy = products.filter((product) => {
             //     return Object.values(product)
@@ -41,8 +41,8 @@ function ProductsLeft(props) {
                 }
             );
 
-            if (productsCopy.length == 0) {
-                setMessage("No products found!")
+            if (productsCopy.length === 0) {
+                setMessage("No products found matching your search!")
             }
             setSearchResults(productsCopy);
         } else {
@@ -50,6 +50,12 @@ function ProductsLeft(props) {
         }
 
         // setSearchResults(searchText);
+    }
+
+    const error = () => {
+        if (message !== '') {
+            return (<Alert sx={{ width: '97%' }} variant="outlined" severity="error">{message}</Alert>)
+        }
     }
 
     if (search_results.length > 0) {
@@ -75,12 +81,11 @@ function ProductsLeft(props) {
             );
         })
 
-        console.log("sjncjb")
 
         return (
             <div >
                 <Search getSearchValue={handleSearch} />
-                <p>{message}</p>
+                {error()}
                 <Grid container style={{ maxHeight: 500, overflow: 'auto' }}>
                     {renderProductList}
                 </Grid>

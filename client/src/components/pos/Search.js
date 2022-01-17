@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useRef } from 'react';
 import React from "react";
 
 import InputBase from '@mui/material/InputBase';
@@ -8,19 +8,23 @@ import SearchIcon from '@mui/icons-material/Search';
 import Divider from '@mui/material/Divider';
 
 import Paper from '@mui/material/Paper';
-import { handleBreakpoints } from '@mui/system';
 
 
 
 
 function Search(props) {
 
-    const products = props.products;
     const [searchTerm, setSearchTerm] = useState("");
+    const InputE = useRef('')
+
     const handleSearchKey = (e) => {
+        e.preventDefault()
         props.getSearchValue(e.target.value)
         setSearchTerm(e.target.value)
     }
+
+    // InputE.current.focus()
+
 
 
 
@@ -35,11 +39,12 @@ function Search(props) {
             </IconButton>
 
             <InputBase
+                ref={InputE}
                 value={searchTerm} onChange={handleSearchKey}
                 // required={true}
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Search for an item"
-                inputProps={{ 'aria-label': 'Search for an item' }}
+                inputProps={{ 'aria-label': 'Search or scan a barcode' }}
             />
             <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
