@@ -11,7 +11,6 @@ import { styled } from '@mui/material/styles';
 
 
 import TableCart from "./TableCart";
-import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
@@ -19,10 +18,10 @@ import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 import AddIcon from '@mui/icons-material/Add';
 import AddCustomerModal from "../customers/AddCustomerModal";
+import Checkout from './Checkout';
 
 
 function ProductsRight(props) {
-    const products = props.products;
     const customers = props.customers;
     const cartItems = props.cartItems;
 
@@ -73,7 +72,7 @@ function ProductsRight(props) {
     const btnCheckout = () => {
         if (cartItems.length > 0) {
             return (
-                <Button style={{ width: "100%" }} sx={{ mt: 4 }} variant="outlined">Chekout</Button>
+                <Checkout cartItems={cartItems} customerId={customerId} />
             )
         }
     }

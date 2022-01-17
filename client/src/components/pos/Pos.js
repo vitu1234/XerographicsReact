@@ -53,12 +53,14 @@ function Pos() {
     };
 
     //handle click and to cart
-    const handleClickAddCart = (id) => {
+    const handleClickAddCart = (id, qty) => {
         setCartProductId(id)
-        console.log("added product: " + id + " to cart")
+        console.log("added product: " + id + " to cart | qty" + qty)
         const productSelected = products.filter((product) => {
             return product.id === id
         })
+
+        console.log(productSelected)
 
         // console.log(productSelected)
         //check if product is already added, if it does, delete and readd with new data
@@ -66,8 +68,13 @@ function Pos() {
 
             for (var i = 0; i < cartItems.length; i++) {
                 if (cartItems[i].product_id === productSelected[0].id) {
+                    let newQty = 0;
+                    if (qty === -1) {
+                        newQty = cartItems[i].qty + 1;
+                    } else {
+                        newQty = qty;
+                    }
 
-                    const newQty = cartItems[i].qty + 1;
 
                     const cartCopy = cartItems.splice(i, 1)//remove item
                     setCartItem(cartCopy);
@@ -78,7 +85,8 @@ function Pos() {
                         product_name: productSelected[0].product_name,
                         qty: newQty,
                         product_code: productSelected[0].product_code,
-                        product_price: productSelected[0].product_price
+                        product_price: productSelected[0].product_price,
+                        stock_qty: productSelected[0].product_qty
                     }
                     setCartItem([...cartItems, Item]);
 
@@ -89,7 +97,8 @@ function Pos() {
                         product_name: productSelected[0].product_name,
                         qty: 1,
                         product_code: productSelected[0].product_code,
-                        product_price: productSelected[0].product_price
+                        product_price: productSelected[0].product_price,
+                        stock_qty: productSelected[0].product_qty
                     }
                     setCartItem([...cartItems, Item]);
                 }
@@ -100,7 +109,8 @@ function Pos() {
                 product_name: productSelected[0].product_name,
                 qty: 1,
                 product_code: productSelected[0].product_code,
-                product_price: productSelected[0].product_price
+                product_price: productSelected[0].product_price,
+                stock_qty: productSelected[0].product_qty
             }
             setCartItem([...cartItems, Item]);
         }

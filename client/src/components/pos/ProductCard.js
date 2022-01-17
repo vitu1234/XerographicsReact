@@ -20,7 +20,7 @@ function ProductCard(props) {
     return (
         // <Grid item xs={4}>
         <Card style={{ margin: "27px", marginLeft: "30px", width: "100%" }} item xs={16} sm={16} md={8} lg={8} sx={{ maxWidth: 210 }}>
-            <CardActionArea onClick={() => props.addToCartProductId(product.id)}>
+            <CardActionArea onClick={() => props.addToCartProductId(product.id, -1)}>
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
 
