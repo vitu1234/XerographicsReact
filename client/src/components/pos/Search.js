@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import React from "react";
 
 import InputBase from '@mui/material/InputBase';
@@ -23,6 +23,10 @@ function Search(props) {
         setSearchTerm(e.target.value)
     }
 
+
+    useEffect(() => {
+        InputE.current.focus()
+    }, [])
     // InputE.current.focus()
 
 
@@ -41,12 +45,12 @@ function Search(props) {
             <InputBase
                 ref={InputE}
                 value={searchTerm} onChange={handleSearchKey}
-                // required={true}
+                required={true}
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Search for an item"
                 inputProps={{ 'aria-label': 'Search or scan a barcode' }}
             />
-            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+            <Divider disabled sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
             <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
                 <QrCodeScannerTwoToneIcon />

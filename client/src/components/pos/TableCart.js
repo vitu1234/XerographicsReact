@@ -10,7 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { useRef } from 'react';
 
 const columns = [
     { id: 'item', label: 'Item' },
@@ -103,10 +106,16 @@ function TableCart(props) {
                                         <TableCell align='right'>
 
                                             {/* {row.qty} () => props.handleClickAddCart(row.product_id) */}
+
+                                            {/* <IconButton aria-label="delete" size="small">
+                                                <RemoveIcon fontSize="inherit" />
+                                            </IconButton>
+                                            <br /> */}
                                             <TextField
+                                                // disabled
                                                 onChange={(e) => handleQtyInput(e, row.product_id)}
-                                                sx={{ width: '50%', alignItems: 'center', textAlign: 'center' }}
-                                                InputProps={{ inputProps: { min: 1, max: row.stock_qty } }}
+                                                sx={{ width: '50%' }}
+                                                InputProps={{ inputProps: { min: 1, max: row.stock_qty, style: { textAlign: 'right' } } }}
                                                 defaultValue={row.qty}
                                                 id="outlined-number"
                                                 type="number"
@@ -115,6 +124,10 @@ function TableCart(props) {
                                                     shrink: true,
                                                 }}
                                             />
+                                            {/* <br />
+                                            <IconButton aria-label="delete" size="small">
+                                                <AddIcon fontSize="inherit" />
+                                            </IconButton> */}
 
                                         </TableCell>
                                         <TableCell align='right'>

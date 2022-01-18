@@ -128,7 +128,7 @@ function ProductsRight(props) {
 
 
 
-            <AddCustomerModal dialogOpen={dialogOpen} handleDialogClose={handleDialogClose} />
+            <AddCustomerModal handleContactUpdate={props.retrieveCustomers} dialogOpen={dialogOpen} handleDialogClose={handleDialogClose} />
 
         </Item>
 

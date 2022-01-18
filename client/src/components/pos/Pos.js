@@ -68,13 +68,21 @@ function Pos() {
 
             for (var i = 0; i < cartItems.length; i++) {
                 if (cartItems[i].product_id === productSelected[0].id) {
+
+
                     let newQty = 0;
                     if (qty === -1) {
-                        newQty = cartItems[i].qty + 1;
+                        console.log((parseInt(cartItems[i].qty) + 1) + " || " + parseInt(productSelected[0].product_qty))
+                        if ((parseInt(cartItems[i].qty) + 1) <= parseInt(productSelected[0].product_qty)) {
+                            newQty = (parseInt(cartItems[i].qty)) + 1;
+                        } else {
+                            newQty = cartItems[i].qty;
+                        }
+
                     } else {
                         newQty = qty;
                     }
-
+                    console.log(newQty)
 
                     const cartCopy = cartItems.splice(i, 1)//remove item
                     setCartItem(cartCopy);
@@ -344,7 +352,7 @@ function Pos() {
                                     </Grid>
 
                                     <Grid item xs={16} sm={16} md={6} lg={6}>
-                                        <ProductsRight cartItems={cartItems} products={products} customers={customers} handleClickAddCart={handleClickAddCart} handleDeleteFromCart={handleDeleteFromCart} />
+                                        <ProductsRight retrieveCustomers={retrieveCustomers} cartItems={cartItems} products={products} customers={customers} handleClickAddCart={handleClickAddCart} handleDeleteFromCart={handleDeleteFromCart} />
                                     </Grid>
 
                                 </Grid>
