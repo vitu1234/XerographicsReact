@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
+
 import React from "react";
 import api from "../../api/api";
 import Alert from "../alerts/alert";
@@ -21,6 +22,9 @@ import ProductsRight from "./ProductsRight";
 
 
 function Pos() {
+
+    const navigate = useNavigate();
+
     //user state
     const [products, setProducts] = useState([])
     const [customers, setCustomers] = useState([])
@@ -305,7 +309,49 @@ function Pos() {
         );
     })
 
+    const handleCheckoutProducts = (data) => {
+        console.log('handleCheckoutProducts')
+        console.log(data)
+        setLoadingProgress(true)
 
+        api.post('/saveInvoice'
+            , data, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+
+            }
+        }
+        )
+            .then(function (response) {
+                setLoadingProgress(false)
+                // console.log(response.data)
+                if (response.data.error == false) {
+
+                    // console.log(response.data.users)
+                    // return response.data.users;
+                    setAlertType('success')
+                    setAlertMessage(response.data.message)
+                    setOpen(true)
+                    // setTimeout(() => { navigate('/pos'); }, 1000)
+                    setCartItem([])
+                } else {
+                    // console.log(response.data.message)
+                    // return [];
+                    setAlertType('error')
+                    setAlertMessage(response.data.message)
+                    setOpen(true)
+                }
+
+            })
+            .catch(function (error) {
+                setLoadingProgress(false)
+                console.log(error);
+                setAlertType('error')
+                setAlertMessage("Error 500: Internal server error")
+                setOpen(true)
+            });
+    }
 
 
 
@@ -383,7 +429,7 @@ function Pos() {
                                     </Grid>
 
                                     <Grid item xs={16} sm={16} md={6} lg={6}>
-                                        <ProductsRight tax_amount={tax_amount} retrieveCustomers={retrieveCustomers} cartItems={cartItems} products={products} customers={customers} handleClickAddCart={handleClickAddCart} handleDeleteFromCart={handleDeleteFromCart} />
+                                        <ProductsRight tax_amount={tax_amount} retrieveCustomers={retrieveCustomers} checkoutProducts={handleCheckoutProducts} cartItems={cartItems} products={products} customers={customers} handleClickAddCart={handleClickAddCart} handleDeleteFromCart={handleDeleteFromCart} />
                                     </Grid>
 
                                 </Grid>

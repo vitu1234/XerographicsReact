@@ -161,6 +161,7 @@ Route::get('/fetchAllPosProducts/{category}', ['App\Http\Controllers\POSControll
 Route::get('/fetchAllPosProductsFilter/{query}', ['App\Http\Controllers\POSController', 'fetchAllPosProductsFilter'])->name('fetchAllPosProductsFilter');
 // add sale
 Route::post('/saveSale', ['App\Http\Controllers\POSController', 'store'])->name('saveSale');
+Route::post('/saveInvoice', ['App\Http\Controllers\POSController', 'saveInvoice'])->name('saveInvoice');
 
 //SALES ROUTES
 //all sales control
