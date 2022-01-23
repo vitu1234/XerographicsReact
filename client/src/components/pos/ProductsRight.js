@@ -79,7 +79,7 @@ function ProductsRight(props) {
             }
 
             return (
-                <Checkout total_calculated={total_calculated} tax_amount={props.tax_amount} cartItems={cartItems} customerId={customerId} />
+                <Checkout customerId={customerId} checkoutProducts={props.checkoutProducts} total_calculated={total_calculated} tax_amount={props.tax_amount} cartItems={cartItems} customerId={customerId} />
             )
         }
     }

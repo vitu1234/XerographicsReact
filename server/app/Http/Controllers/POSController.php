@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\POS;
-use App\Models\Customer;
 use App\Models\Category;
-use App\Models\Tax;
+use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\InvoiceDetails;
+use App\Models\POS;
 use App\Models\Product;
+use App\Models\Tax;
 use App\Models\UserBranch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -71,12 +71,12 @@ class POSController extends Controller
                     ',
             [
                 $category
-                ]
+            ]
         );
 
         if (!empty($products)) {
             $data = array(
-                'status'=>200,
+                'status' => 200,
                 'error' => false,
                 'message' => 'success',
                 'products' => $products,
@@ -85,7 +85,7 @@ class POSController extends Controller
             return response()->json($data, 200);
         } else {
             $data = array(
-                'status'=>200,
+                'status' => 200,
                 'error' => true,
                 'message' => 'No products found!',
             );
@@ -238,9 +238,155 @@ class POSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function saveInvoice(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $sale_by = 1;//replace after adding auth
+        $branch_id = 1;
+
+        $amount_paid = $data['amount_paid'];
+//        $customerId = $data['customerId'];
+//        $discount_amount = $data['discount_amount'];
+        $discount_percent = $data['discount_percent'];
+        $tax_amount = !empty($data['tax_amount']) == True ? $data['tax_amount'] : 0;
+        $customerId = ($data['customerId'] == -1) == False ? $data['tax_amount'] : 1;
+        $discount_amount = !empty($data['discount_amount']) == True ? $data['discount_amount'] : 0;
+        $tax_percent = $data['tax_percent'];
+        $payment = $data['payment_type'];
+        $payment_type = "";
+        $total = $data['total'];
+        $total_without_mod = $data['total_without_mod'];
+        $amount_due = $data['amount_due'];
+        $cartItems = $data['cartItems'];
+
+        if ($payment == 1) {
+            $payment_type = "Cash Payment";
+        } elseif ($payment == 2) {
+            $payment_type = "Mobile Money Payment";
+        } elseif ($payment == 3) {
+            $payment_type = "Bank Payment";
+        }
+
+
+        $saveData = DB::connection('mysql')->insert(
+            'INSERT INTO invoices (
+            branch_id,
+            customer_id, 
+            sale_by,
+            payment_type,
+            discount_amount ,  
+            discount_percent,
+            total_tax,
+            paid_amount,
+            total_before_disc_tax,
+            total_after_disc_tax,
+            amount_due
+            )
+        VALUES (
+            :branch_id,
+            :customer_id, 
+            :sale_by,
+            :payment_type,
+            :discount_amount,  
+            :discount_percent,  
+            :total_tax,
+            :paid_amount,
+            :total_before_disc_tax,
+            :total_after_disc_tax,
+            :amount_due
+            )',
+
+            [
+                'branch_id' => $branch_id,
+                'customer_id' => $customerId,
+                'sale_by' => $sale_by,
+                'payment_type' => $payment_type,
+                'discount_amount' => $discount_amount,
+                'discount_percent' => $discount_percent,
+                'total_tax' => $tax_amount,
+                'paid_amount' => $amount_paid,
+                'total_before_disc_tax' => $total_without_mod,
+                'total_after_disc_tax' => $total,
+                'amount_due' => $amount_due
+            ]
+        );
+
+        if ($saveData) {
+            //get the saved record
+            $invoiceDetails = DB::connection('mysql')->select(
+                'SELECT * 
+                    FROM invoices
+                    WHERE branch_id = :branch_id
+                    AND customer_id = :customer_id
+                    AND sale_by = :sale_by
+                    AND payment_type = :payment_type
+                    AND discount_amount = :discount_amount
+                    AND total_after_disc_tax =:total_after_disc_tax
+                    AND total_before_disc_tax =:total_before_disc_tax
+                    ',
+                [
+                    'branch_id' => $branch_id,
+                    'customer_id' => $customerId,
+                    'sale_by' => $sale_by,
+                    'payment_type' => $payment_type,
+                    'discount_amount' => $discount_amount,
+                    'total_after_disc_tax' => $total,
+                    'total_before_disc_tax' => $total_without_mod,
+                ]
+            );
+
+            if (!empty($invoiceDetails)) {
+                $invoice = $invoiceDetails[0];
+                $invoice_id = $invoice->id;
+                for ($i = 0; $i < count($cartItems); $i++) {
+                    //save invoice details
+                    DB::connection('mysql')->insert(
+                        'INSERT INTO invoice_details (
+                            invoice_id,
+                            product_id, 
+                            product_qty,
+                            total_price
+                            )
+                        VALUES (
+                            :invoice_id,
+                            :product_id, 
+                            :product_qty,
+                            :total_price
+                            )',
+
+                        [
+                            'invoice_id' => $invoice_id,
+                            'product_id' => $cartItems[$i]['product_id'],
+                            'product_qty' => $cartItems[$i]['qty'],
+                            'total_price' => ($cartItems[$i]['qty'] * $cartItems[$i]['product_price']),
+                        ]
+                    );
+
+                }
+
+                //save invoice details
+                return response()->json([
+                    'status' => 200,
+                    'error' => false,
+                    'message' => 'Sale saved successfully'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 500,
+                    'error' => true,
+                    'message' => 'Something is keeping you from proceeding with this save, Internal server error'
+                ]);
+            }
+        } else {
+            return response()->json([
+                'status' => 500,
+                'error' => true,
+                'message' => 'Saving sale failed, Internal server error'
+            ]);
+        }
+
+
     }
 
     /**

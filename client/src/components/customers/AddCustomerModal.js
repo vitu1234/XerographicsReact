@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 
 export default function AddCustomerModal(props) {
 
-    console.log(props)
+    // console.log(props)
 
     //alert state
     const [open, setOpen] = useState(false);

@@ -14,22 +14,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
 function Checkout(props) {
-    console.log(props)
+    // console.log(props)
 
-    const [values, setValues] = useState({
-        amount_paid: '',
-        discount_percent: '',
-        discount_amount: '',
-        tax_amount: '',
-        tax_percent: props.tax_amount,
-        payment_type: 1,
-        total: props.total_calculated,
-        total_without_mod: props.total_calculated,
-    });
-
-
-
-
+    const [amount_paid, setAmountPaid] = useState('');
+    const [discount_amount, setDiscountAmount] = useState('');
+    const [discount_percent, setDiscountPercent] = useState(0);
+    const [tax_amount, setTaxAmount] = useState('');
+    const [tax_percent, setTaxPercent] = useState(props.tax_amount);
+    const [payment_type, setPaymentType] = useState(1);
+    const [total, setTotal] = useState(props.total_calculated);
+    const [total_without_mod, setTotalWithoutMod] = useState(props.total_calculated);
+    const [amount_due, setAmountDue] = useState(total);
+    const [disable_status, setButtonStatus] = useState('disabled');
 
     const formatNumber = (number) => {
         var nf = new Intl.NumberFormat();
@@ -37,34 +33,145 @@ function Checkout(props) {
         return result;
     }
 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
+    const handleChange = (prop) => (e) => {
 
         if (prop === 'discount_percent') {
-            let discount_amount_ = (parseInt(values.total_without_mod) * parseInt(event.target.value)) / 100;
-            setValues({ ...values, ['discount_amount']: discount_amount_ });
-
-        } else if (prop === 'amount_paid') {
-            console.log('amount_paid')
-        } else if ('apply_tax') {
-            if (event.target.value === 1) {
-                let tax_amount = (parseInt(values.total_without_mod) * parseInt(props.tax_amount)) / 100;
-                setValues({ ...values, ['tax_amount']: tax_amount });
-            } else {
-                setValues({ ...values, ['tax_amount']: 0 });
+            let discount = 0;
+            if (e.target.value.length !== 0) {
+                discount = e.target.value;
             }
 
-            if (values.discount_amount.length === 0) {
-                let total = (parseInt(values.total_without_mod) + parseInt(values.tax_amount)) - (parseInt(0));
-                setValues({ ...values, ['total']: total });
+            setDiscountPercent(discount);
+            let discount_amount_ = (parseInt(total_without_mod) * parseInt(discount)) / 100;
+            setDiscountAmount(discount_amount_);
+
+            if (tax_amount.length === 0) {
+                let total = (parseInt(total_without_mod)) - (parseInt(discount_amount_));
+                setTotal(total)
+                if (amount_paid.length > 0) {
+                    let amt_due = parseInt(total) - parseInt(amount_paid);
+                    setAmountDue(amt_due)
+                    if (parseInt(amt_due) <= 0) {
+                        setButtonStatus('')
+                    } else {
+                        setButtonStatus('disabled')
+                    }
+                } else {
+                    setAmountDue(total)
+                }
             } else {
-                let total = (parseInt(values.total_without_mod) + parseInt(values.tax_amount)) - (parseInt(values.discount_amount));
-                setValues({ ...values, ['total']: total });
+
+                let total = (parseInt(total_without_mod) - parseInt(tax_amount)) - (parseInt(discount_amount));
+                setTotal(total)
+                if (amount_paid.length > 0) {
+                    let amt_due = parseInt(total) - parseInt(amount_paid);
+                    setAmountDue(amt_due)
+                    if (parseInt(amt_due) <= 0) {
+                        setButtonStatus('')
+                    } else {
+                        setButtonStatus('disabled')
+                    }
+                } else {
+                    setAmountDue(total)
+                }
+            }
+
+
+
+
+        } else if (prop === 'amount_paid') {
+            // console.log('amount_paid')
+            let amount_paid_ = 0;
+            if (e.target.value.length > 0) {
+                amount_paid_ = e.target.value
+            }
+            setAmountPaid(e.target.value)
+            // console.log(e.target.value)
+            // console.log(amount_paid_)
+
+            let amt_due = parseInt(total) - parseInt(amount_paid_);
+            setAmountDue(amt_due)
+            if (parseInt(amt_due) <= 0) {
+                setButtonStatus('')
+            } else {
+                setButtonStatus('disabled')
+            }
+
+
+        } else if ('apply_tax') {
+
+            let tax_amount_ = 0;
+            if (parseInt(e.target.value) === 0) {
+                tax_amount_ = (parseInt(total_without_mod) * parseInt(tax_percent)) / 100;
+                setTaxAmount(tax_amount_)
+
+                if (discount_amount.length === 0) {
+                    let total = (parseInt(total_without_mod) - parseInt(tax_amount_));
+                    setTotal(total)
+                    if (amount_paid.length > 0) {
+                        let amt_due = parseInt(total) - parseInt(amount_paid);
+                        setAmountDue(amt_due)
+                        if (parseInt(amt_due) <= 0) {
+                            setButtonStatus('')
+                        } else {
+                            setButtonStatus('disabled')
+                        }
+                    } else {
+                        setAmountDue(total)
+                    }
+                } else {
+                    let total = (parseInt(total_without_mod) - parseInt(tax_amount_)) - (parseInt(discount_amount));
+                    setTotal(total)
+                    if (amount_paid.length > 0) {
+                        let amt_due = parseInt(total) - parseInt(amount_paid);
+                        setAmountDue(amt_due)
+                        if (parseInt(amt_due) <= 0) {
+                            setButtonStatus('')
+                        } else {
+                            setButtonStatus('disabled')
+                        }
+                    } else {
+                        setAmountDue(total)
+                    }
+                }
+
+            } else {
+                tax_amount_ = 0;
+                setTaxAmount(tax_amount_)
+
+                if (discount_amount.length === 0) {
+                    let total = (parseInt(total_without_mod) + parseInt(tax_amount_));
+                    setTotal(total)
+                    if (amount_paid.length > 0) {
+                        let amt_due = parseInt(total) - parseInt(amount_paid);
+                        setAmountDue(amt_due)
+                        if (parseInt(amt_due) <= 0) {
+                            setButtonStatus('')
+                        } else {
+                            setButtonStatus('disabled')
+                        }
+                    } else {
+                        setAmountDue(total)
+                    }
+                } else {
+                    let total = (parseInt(total_without_mod) + parseInt(tax_amount_)) - (parseInt(discount_amount));
+                    setTotal(total)
+                    if (amount_paid.length > 0) {
+                        let amt_due = parseInt(total) - parseInt(amount_paid);
+                        setAmountDue(amt_due)
+                        if (parseInt(amt_due) <= 0) {
+                            setButtonStatus('')
+                        } else {
+                            setButtonStatus('disabled')
+                        }
+                    } else {
+                        setAmountDue(total)
+                    }
+                }
             }
 
         }
 
-        console.log(values)
     };
 
 
@@ -74,10 +181,28 @@ function Checkout(props) {
         padding: theme.spacing(1),
     }));
 
+    const checkoutPayment = (e) => {
+        const data = {
+            customerId: props.customerId,
+            amount_paid: amount_paid,
+            discount_amount: discount_amount,
+            discount_percent: discount_percent,
+            tax_amount: tax_amount,
+            tax_percent: tax_percent,
+            payment_type: payment_type,
+            total: total,
+            total_without_mod: total_without_mod,
+            amount_due: amount_due,
+            cartItems: props.cartItems
+        }
+
+        props.checkoutProducts(data)
+    }
+
     return (
         <div >
 
-            <Box sx={{ width: '60%', mt: 3 }}>
+            <Box sx={{ width: '80%', mt: 3 }}>
 
                 <FormControl fullWidth sx={{ m: 1 }} variant="standard">
                     <InputLabel htmlFor="standard-adornment-amount">Discount (%)</InputLabel>
@@ -88,7 +213,7 @@ function Checkout(props) {
                             }
                         }}
                         id="standard-adornment-amount"
-                        value={values.discount_percent}
+                        value={discount_percent}
                         onChange={handleChange('discount_percent')}
 
                     />
@@ -103,7 +228,7 @@ function Checkout(props) {
                             }
                         }}
                         id="standard-adornment-amount"
-                        value={values.amount_paid}
+                        value={amount_paid}
                         onChange={handleChange('amount_paid')}
                         startAdornment={<InputAdornment position="start">MWK</InputAdornment>}
                     />
@@ -113,7 +238,7 @@ function Checkout(props) {
                     <FormLabel htmlFor="html_tax">Apply VAT ({props.tax_amount}%)</FormLabel>
                     <RadioGroup
                         onChange={handleChange('apply_tax')}
-                        defaultValue="0"
+                        defaultValue="1"
                         id='html_tax'
                         row
                         aria-labelledby="demo-row-radio-buttons-group-label"
@@ -125,12 +250,12 @@ function Checkout(props) {
 
                     </RadioGroup>
                 </FormControl>
-                <FormControl style={{ textAlign: 'left' }} fullWidth sx={{ m: 1 }} variant="standard" style={{ textAlign: 'left' }} fullWidth sx={{ m: 1 }}>
+                <FormControl style={{ textAlign: 'left' }} fullWidth sx={{ m: 1 }} variant="standard">
                     <InputLabel id="demo-simple-select-standard-label">Payment Type</InputLabel>
                     <Select
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
-                        value={values.payment_type}
+                        value={payment_type}
                         onChange={handleChange('payment_type')}
                         label="Payment Type"
                     >
@@ -139,10 +264,11 @@ function Checkout(props) {
                         <MenuItem value={3}>Bank Payment</MenuItem>
                     </Select>
                 </FormControl>
-                <Div style={{ textAlign: 'left' }} sx={{ m: 1 }}>{`Total: MWK ${formatNumber(values.total)}`}</Div>;
+                <Div style={{ textAlign: 'left' }} sx={{ m: 1 }}>{`Total: MWK ${formatNumber(total)}`}</Div>
+                <Div style={{ textAlign: 'left' }} sx={{ m: 1 }}>{`Amount Due: MWK ${formatNumber(amount_due)}`}</Div>
 
             </Box>
-            <Button style={{ width: "100%" }} variant="outlined">Chekout (MWK {formatNumber(values.total)})</Button>
+            <Button onClick={checkoutPayment} disabled={disable_status} style={{ width: "100%" }} variant="outlined">Chekout (MWK {formatNumber(total)})</Button>
         </div>
 
     );
