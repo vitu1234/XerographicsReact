@@ -9,7 +9,11 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
-
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { useRef } from 'react';
 
 const columns = [
     { id: 'item', label: 'Item' },
@@ -29,14 +33,9 @@ const columns = [
 
 function TableCart(props) {
 
-
-    // console.log(props)
+    console.log(props)
 
     const cartItems = props.cartItems;
-    // console.log(cartItems);
-
-
-
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -71,10 +70,17 @@ function TableCart(props) {
         }
     }
 
+    const handleQtyInput = (e, id) => {
+        // console.log(e.target.value)
+        // console.log(id)
+        props.handleClickAddCart(id, e.target.value)
+        // props.getSearchValue(e.target.value)
+    }
+
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
+            <TableContainer sx={{ maxHeight: 400, height: 400 }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -98,7 +104,31 @@ function TableCart(props) {
                                             {row.product_name} <br /> <small><i>MWK {formatNumber(row.product_price)}</i></small>
                                         </TableCell>
                                         <TableCell align='right'>
-                                            {row.qty}
+
+                                            {/* {row.qty} () => props.handleClickAddCart(row.product_id) */}
+
+                                            {/* <IconButton aria-label="delete" size="small">
+                                                <RemoveIcon fontSize="inherit" />
+                                            </IconButton>
+                                            <br /> */}
+                                            <TextField
+                                                // disabled
+                                                onChange={(e) => handleQtyInput(e, row.product_id)}
+                                                sx={{ width: '50%' }}
+                                                InputProps={{ inputProps: { min: 1, max: row.stock_qty, style: { textAlign: 'right' } } }}
+                                                defaultValue={row.qty}
+                                                id="outlined-number"
+                                                type="number"
+                                                variant='standard'
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                            />
+                                            {/* <br />
+                                            <IconButton aria-label="delete" size="small">
+                                                <AddIcon fontSize="inherit" />
+                                            </IconButton> */}
+
                                         </TableCell>
                                         <TableCell align='right'>
                                             <Button onClick={() => props.getDeleteProductIdFromCart(row.product_id)} variant="outlined" startIcon={<DeleteIcon />} color="error">
