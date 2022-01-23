@@ -33,7 +33,7 @@ const columns = [
 
 function TableCart(props) {
 
-    console.log(props)
+    // console.log(props)
 
     const cartItems = props.cartItems;
     const [page, setPage] = React.useState(0);

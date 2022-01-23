@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tax;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaxController extends Controller
 {
@@ -12,9 +13,32 @@ class TaxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function fetchActiveTax()
     {
-        //
+        $tax = DB::connection('mysql')->select(
+            'SELECT *FROM tax
+               ORDER BY id DESC 
+                    '
+        );
+
+        if (!empty($tax)) {
+            $data = array(
+                'status'=>200,
+                'error' => false,
+                'message' => 'success',
+                'tax' => $tax[0],
+            );
+
+            return response()->json($data, 200);
+        } else {
+            $data = array(
+                'status'=>200,
+                'error' => true,
+                'message' => 'No tax found!',
+            );
+
+            return response()->json($data, 200);
+        }
     }
 
     /**

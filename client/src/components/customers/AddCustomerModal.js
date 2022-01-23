@@ -141,6 +141,7 @@ export default function AddCustomerModal(props) {
 
                         <div className="modal-footer">
                             <button type="submit" id="btn_add" className="btn btn-primary">Save</button>
+                            <button onClick={props.handleDialogClose} type="button" id="btn_add" className="btn btn-secondary">Close</button>
                         </div>
 
                     </form>

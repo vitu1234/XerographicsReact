@@ -19,6 +19,7 @@ import Divider from '@mui/material/Divider';
 import AddIcon from '@mui/icons-material/Add';
 import AddCustomerModal from "../customers/AddCustomerModal";
 import Checkout from './Checkout';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 
 
 function ProductsRight(props) {
@@ -71,8 +72,14 @@ function ProductsRight(props) {
 
     const btnCheckout = () => {
         if (cartItems.length > 0) {
+
+            let total_calculated = 0;
+            for (var i = 0; i < cartItems.length; i++) {
+                total_calculated += (parseInt(cartItems[i].qty) * parseInt(cartItems[i].product_price));
+            }
+
             return (
-                <Checkout cartItems={cartItems} customerId={customerId} />
+                <Checkout total_calculated={total_calculated} tax_amount={props.tax_amount} cartItems={cartItems} customerId={customerId} />
             )
         }
     }
@@ -114,7 +121,7 @@ function ProductsRight(props) {
                     <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
                     <IconButton onClick={handleClickOpen} color="primary" sx={{ p: '10px' }} aria-label="directions">
-                        <AddIcon />
+                        <PersonAddAlt1Icon />
                     </IconButton>
                 </Paper>
 

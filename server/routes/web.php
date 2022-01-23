@@ -142,6 +142,11 @@ Route::resource('settings', 'App\Http\Controllers\SystemSettingsController');
 
 //PROFILE ROUTES
 //all profile control
+Route::get('/fetchActiveTax',  ['App\Http\Controllers\TaxController', 'fetchActiveTax'])->name('fetchActiveTax');
+
+// ===========================================================================
+
+//TAX ROUTES
 Route::resource('profile', 'App\Http\Controllers\UserProfileController');
 
 // ===========================================================================

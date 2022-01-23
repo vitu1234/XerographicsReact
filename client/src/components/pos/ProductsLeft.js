@@ -69,7 +69,7 @@ function ProductsLeft(props) {
         return (
             <div >
                 <Search getSearchValue={handleSearch} />
-                <Grid container style={{ maxHeight: 500, overflow: 'auto' }}>
+                <Grid container style={{ maxHeight: 855, overflow: 'auto' }}>
                     {renderProductList}
                 </Grid>
             </div>
@@ -86,7 +86,7 @@ function ProductsLeft(props) {
             <div >
                 <Search getSearchValue={handleSearch} />
                 {error()}
-                <Grid container style={{ maxHeight: 500, overflow: 'auto' }}>
+                <Grid container style={{ maxHeight: 855, overflow: 'auto' }}>
                     {renderProductList}
                 </Grid>
             </div>

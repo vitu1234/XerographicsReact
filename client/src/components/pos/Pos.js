@@ -27,6 +27,7 @@ function Pos() {
     const [product_categories, setProductsCategories] = useState([])
     const [cartItems, setCartItem] = useState([])
     const [productCartId, setCartProductId] = React.useState(-1);
+    const [tax_amount, setTaxAmount] = React.useState(-1);
 
     let products_url = 'fetchAllProducts';
 
@@ -258,6 +259,35 @@ function Pos() {
             });
     }
 
+    //get tax
+    const retrieveTax = () => {
+
+        api.get('/fetchActiveTax'
+            , {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }
+        )
+            .then(function (response) {
+
+                if (response.data.error === false) {
+
+                    setTaxAmount(response.data.tax.tax_amount)
+
+                } else {
+                    // console.log(response.data.message)
+                    // return [];
+                    setTaxAmount(-1)
+
+                }
+
+            })
+            .catch(function (error) {
+            });
+    }
+
 
     const loading = () => {
         if (loadingProgress) {
@@ -280,6 +310,7 @@ function Pos() {
 
 
     useEffect(() => {
+        retrieveTax()
         retrieveProductsCategories();
         retrieveCustomers()
         retrieveProducts();
@@ -352,7 +383,7 @@ function Pos() {
                                     </Grid>
 
                                     <Grid item xs={16} sm={16} md={6} lg={6}>
-                                        <ProductsRight retrieveCustomers={retrieveCustomers} cartItems={cartItems} products={products} customers={customers} handleClickAddCart={handleClickAddCart} handleDeleteFromCart={handleDeleteFromCart} />
+                                        <ProductsRight tax_amount={tax_amount} retrieveCustomers={retrieveCustomers} cartItems={cartItems} products={products} customers={customers} handleClickAddCart={handleClickAddCart} handleDeleteFromCart={handleDeleteFromCart} />
                                     </Grid>
 
                                 </Grid>
