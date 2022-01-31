@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import {Link} from "react-router-dom";
+import {useEffect, useState} from 'react';
 import React from "react";
 import BranchListRow from "./BranchListRow";
 import api from "../../api/api";
@@ -36,7 +36,6 @@ function Branches() {
     const [dialogMessage, setDialogMessage] = useState("");
 
 
-
     const handleAlertClose = () => {
         setOpen(false);
         setAlertMessage('')
@@ -57,7 +56,8 @@ function Branches() {
             , {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': 'bearer ' + sessionStorage.getItem('jwt_token')
                 }
             }
         )
@@ -98,7 +98,8 @@ function Branches() {
                 , {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Authorization': 'bearer ' + sessionStorage.getItem('jwt_token')
                     }
                 }
             )
@@ -145,14 +146,14 @@ function Branches() {
 
     const renderBranchList = branches.map((branch) => {
         return (
-            <BranchListRow key={branch.id} branch={branch} getDeleteBranchId={handleClickOpen} ></BranchListRow>
+            <BranchListRow key={branch.id} branch={branch} getDeleteBranchId={handleClickOpen}></BranchListRow>
         );
     })
     const loading = () => {
         if (loadingProgress) {
             return (
                 <div className="mb-3">
-                    <LinearProgressLoad />
+                    <LinearProgressLoad/>
                 </div>
             )
         }
@@ -166,14 +167,15 @@ function Branches() {
                             <div className="col-lg-6 col-7">
                                 <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                     <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                        <li className="breadcrumb-item"><Link to={"/"}><i className="fas fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/"}><i
+                                            className="fas fa-home"></i></Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Branches</li>
                                     </ol>
                                 </nav>
                             </div>
                             <div className="col-lg-6 col-5 text-right">
 
-                                <Link to={'addBranch'} >
+                                <Link to={'addBranch'}>
                                     <button type="button" className="btn btn-sm btn-neutral my-1">New Branch</button>
                                 </Link>
 
@@ -191,18 +193,18 @@ function Branches() {
                         <div className="card">
                             {loading()}
                             <div className="table-responsive mt-4" id="">
-                                <table className="table table-hover mt-3 " id="users_tbl" >
+                                <table className="table table-hover mt-3 " id="users_tbl">
                                     <thead className="thead">
-                                        <tr>
-                                            <th >Branch Name</th>
-                                            <th >Phone</th>
-                                            <th >Email</th>
-                                            <th >Address</th>
-                                            <th >Action</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Branch Name</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>Action</th>
+                                    </tr>
                                     </thead>
                                     <tbody className="">
-                                        {renderBranchList}
+                                    {renderBranchList}
                                     </tbody>
                                 </table>
                             </div>
@@ -212,8 +214,10 @@ function Branches() {
                 </div>
             </div>
 
-            <Dialogs dialogOpen={dialogOpen} dialogAction={dialogAction} dialogTitle={dialogTitle} dialogMessage={dialogMessage} handleDialogClose={handleDialogClose} />
-            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType} handleAlertClose={handleAlertClose} />
+            <Dialogs dialogOpen={dialogOpen} dialogAction={dialogAction} dialogTitle={dialogTitle}
+                     dialogMessage={dialogMessage} handleDialogClose={handleDialogClose}/>
+            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType}
+                   handleAlertClose={handleAlertClose}/>
         </div>
     );
 }

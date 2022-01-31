@@ -1,12 +1,12 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import {Link, useNavigate, useLocation} from "react-router-dom";
+import {useEffect, useState} from 'react';
 
 import React from "react";
 import api from "../../api/api";
 import Alert from "../alerts/alert";
 import LinearProgressLoad from "../alerts/LinearProgress";
 
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -43,7 +43,6 @@ function Pos() {
     const [value, setValue] = useState(-1);
     const [alertType, setAlertType] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
-
 
 
     const handleChangeTab = (event, newValue) => {
@@ -142,13 +141,12 @@ function Pos() {
     }
 
 
-    const Item = styled(Paper)(({ theme }) => ({
+    const Item = styled(Paper)(({theme}) => ({
         ...theme.typography.body2,
         padding: theme.spacing(1),
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
-
 
 
     const handleAlertClose = () => {
@@ -166,7 +164,8 @@ function Pos() {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
-                }
+                }, credentials: 'include'
+
             }
         )
             .then(function (response) {
@@ -297,7 +296,7 @@ function Pos() {
         if (loadingProgress) {
             return (
                 <div className="mb-3">
-                    <LinearProgressLoad />
+                    <LinearProgressLoad/>
                 </div>
             )
         }
@@ -305,7 +304,7 @@ function Pos() {
 
     const renderProductCategoryList = product_categories.map((product_category) => {
         return (
-            <Tab key={product_category.id} value={product_category.id} label={product_category.category_name} />
+            <Tab key={product_category.id} value={product_category.id} label={product_category.category_name}/>
         );
     })
 
@@ -316,12 +315,12 @@ function Pos() {
 
         api.post('/saveInvoice'
             , data, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
 
+                }
             }
-        }
         )
             .then(function (response) {
                 setLoadingProgress(false)
@@ -354,7 +353,6 @@ function Pos() {
     }
 
 
-
     useEffect(() => {
         retrieveTax()
         retrieveProductsCategories();
@@ -371,7 +369,8 @@ function Pos() {
                             <div className="col-lg-6 col-7">
                                 <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                     <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                        <li className="breadcrumb-item"><Link to={"/"}><i className="fas fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/"}><i
+                                            className="fas fa-home"></i></Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">POS</li>
                                     </ol>
                                 </nav>
@@ -396,13 +395,13 @@ function Pos() {
 
                             </div>
 
-                            <Box sx={{ flexGrow: 6 }}>
+                            <Box sx={{flexGrow: 6}}>
                                 <Grid container spacing={2} columns={16}>
 
 
                                     <Grid item xs={16} sm={16} md={10} lg={10}>
-                                        <Item >
-                                            <Box sx={{ width: '100%' }}>
+                                        <Item>
+                                            <Box sx={{width: '100%'}}>
                                                 <Tabs
                                                     value={value}
                                                     onChange={handleChangeTab}
@@ -415,7 +414,7 @@ function Pos() {
                                                     allowScrollButtonsMobile
                                                     aria-label="scrollable force tabs example"
                                                 >
-                                                    <Tab key="2S" value={-1} label="All" />
+                                                    <Tab key="2S" value={-1} label="All"/>
                                                     {renderProductCategoryList}
                                                 </Tabs>
                                             </Box>
@@ -423,13 +422,17 @@ function Pos() {
                                             {/* <Search getSearchValue={handleSearch} /> */}
 
                                             {/* {renderProductList} */}
-                                            <ProductsLeft products={products} addToCartProductId={handleClickAddCart} />
+                                            <ProductsLeft products={products} addToCartProductId={handleClickAddCart}/>
 
                                         </Item>
                                     </Grid>
 
                                     <Grid item xs={16} sm={16} md={6} lg={6}>
-                                        <ProductsRight tax_amount={tax_amount} retrieveCustomers={retrieveCustomers} checkoutProducts={handleCheckoutProducts} cartItems={cartItems} products={products} customers={customers} handleClickAddCart={handleClickAddCart} handleDeleteFromCart={handleDeleteFromCart} />
+                                        <ProductsRight tax_amount={tax_amount} retrieveCustomers={retrieveCustomers}
+                                                       checkoutProducts={handleCheckoutProducts} cartItems={cartItems}
+                                                       products={products} customers={customers}
+                                                       handleClickAddCart={handleClickAddCart}
+                                                       handleDeleteFromCart={handleDeleteFromCart}/>
                                     </Grid>
 
                                 </Grid>
@@ -442,7 +445,8 @@ function Pos() {
                 </div>
             </div>
 
-            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType} handleAlertClose={handleAlertClose} />
+            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType}
+                   handleAlertClose={handleAlertClose}/>
         </div>
     );
 }

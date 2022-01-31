@@ -1,13 +1,17 @@
 import react from "react";
+import {useNavigate} from "react-router-dom";
+import Login from "../Login/Login";
+import TopBar from "../incl/TopBar";
+
 
 function Dashboard() {
+    const navigate = useNavigate()
+    if (sessionStorage.getItem("jwt_token") === null) {
+        navigate('/login')
+    }
     return (
 
-        <div >
-
-
-
-
+        <div>
 
 
             <div className="header bg-primary pb-6">
@@ -17,7 +21,8 @@ function Dashboard() {
                             <div className="col-lg-6 col-7">
                                 <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                     <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                        <li className="breadcrumb-item"><a href="/"><i className="fas fa-home"></i></a></li>
+                                        <li className="breadcrumb-item"><a href="/"><i className="fas fa-home"></i></a>
+                                        </li>
                                         <li className="breadcrumb-item">Dashboard</li>
 
                                     </ol>
@@ -56,7 +61,8 @@ function Dashboard() {
                                                 <span className="h2 font-weight-bold mb-0">0</span>
                                             </div>
                                             <div className="col-auto">
-                                                <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                                <div
+                                                    className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
                                                     <i className="ni ni-active-40"></i>
                                                 </div>
                                             </div>
@@ -78,7 +84,8 @@ function Dashboard() {
                                                 <span className="h2 font-weight-bold mb-0">6</span>
                                             </div>
                                             <div className="col-auto">
-                                                <div className="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                                <div
+                                                    className="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
                                                     <i className="ni ni-chart-pie-35"></i>
                                                 </div>
                                             </div>
@@ -100,13 +107,15 @@ function Dashboard() {
                                                 <span className="h2 font-weight-bold mb-0">3</span>
                                             </div>
                                             <div className="col-auto">
-                                                <div className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                                <div
+                                                    className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
                                                     <i className="ni ni-money-coins"></i>
                                                 </div>
                                             </div>
                                         </div>
                                         <p className="mt-3 mb-0 text-sm">
-                                            <span className="text-danger mr-2"><i className="fa fa-arrow-down"></i> 0</span>
+                                            <span className="text-danger mr-2"><i
+                                                className="fa fa-arrow-down"></i> 0</span>
                                             <span className="text-nowrap">Out of Stock</span>
                                         </p>
                                     </div>
@@ -122,7 +131,8 @@ function Dashboard() {
                                                 <span className="h2 font-weight-bold mb-0">3</span>
                                             </div>
                                             <div className="col-auto">
-                                                <div className="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                                <div
+                                                    className="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                                                     <i className="ni ni-chart-bar-32"></i>
                                                 </div>
                                             </div>
@@ -141,6 +151,7 @@ function Dashboard() {
 
         </div>
     );
+
 }
 
 export default Dashboard;
