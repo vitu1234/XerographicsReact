@@ -1,5 +1,5 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import {Link, useNavigate, useLocation} from "react-router-dom";
+import {useEffect, useState} from 'react';
 import api from "../../api/api";
 import Alert from "../alerts/alert";
 import LinearProgressLoad from "../alerts/LinearProgress";
@@ -61,13 +61,7 @@ function AddBranch(props) {
         console.log(state)
 
         api.post('/saveBranch'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 setLoadingProgress(false)
@@ -79,7 +73,9 @@ function AddBranch(props) {
                     setAlertType('success')
                     setAlertMessage(response.data.message)
                     setOpen(true)
-                    setTimeout(() => { navigate('/branches'); }, 1000)
+                    setTimeout(() => {
+                        navigate('/branches');
+                    }, 1000)
 
                 } else {
                     // console.log(response.data.message)
@@ -102,7 +98,7 @@ function AddBranch(props) {
         if (loadingProgress) {
             return (
                 <div className="mb-3">
-                    <LinearProgressLoad />
+                    <LinearProgressLoad/>
                 </div>
             )
         }
@@ -118,8 +114,10 @@ function AddBranch(props) {
                                 <div className="col-lg-6 col-7">
                                     <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                         <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                            <li className="breadcrumb-item"><Link to={"/"}><i className="fas fa-home"></i></Link></li>
-                                            <li className="breadcrumb-item active" aria-current="page"><Link to={'/branches'}>Branches</Link></li>
+                                            <li className="breadcrumb-item"><Link to={"/"}><i
+                                                className="fas fa-home"></i></Link></li>
+                                            <li className="breadcrumb-item active" aria-current="page"><Link
+                                                to={'/branches'}>Branches</Link></li>
                                             <li className="breadcrumb-item active" aria-current="page">Add Branch</li>
                                         </ol>
                                     </nav>
@@ -145,29 +143,38 @@ function AddBranch(props) {
 
                                         <div className="col-md-12">
                                             <div className="form-group">
-                                                <label >Branch Name <span className='text-danger'>*</span></label>
-                                                <input value={branch_name} onChange={(e) => setBranchName(e.target.value)} type="text" className="form-control" placeholder="Ex: Area 4 Branch" required />
+                                                <label>Branch Name <span className='text-danger'>*</span></label>
+                                                <input value={branch_name}
+                                                       onChange={(e) => setBranchName(e.target.value)} type="text"
+                                                       className="form-control" placeholder="Ex: Area 4 Branch"
+                                                       required/>
                                             </div>
                                         </div>
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <label >Branch Phone <span className='text-danger'>*</span></label>
-                                                <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" className="form-control" placeholder="Ex: +265882992942" required />
+                                                <label>Branch Phone <span className='text-danger'>*</span></label>
+                                                <input value={phone} onChange={(e) => setPhone(e.target.value)}
+                                                       type="tel" className="form-control"
+                                                       placeholder="Ex: +265882992942" required/>
                                             </div>
                                         </div>
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <label >Branch Email <span className='text-danger'>*</span></label>
-                                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" placeholder="Ex: email@example.com" required />
+                                                <label>Branch Email <span className='text-danger'>*</span></label>
+                                                <input value={email} onChange={(e) => setEmail(e.target.value)}
+                                                       type="email" className="form-control"
+                                                       placeholder="Ex: email@example.com" required/>
                                             </div>
                                         </div>
 
                                         <div className="col-md-12">
                                             <div className="form-group">
-                                                <label >Branch Address</label>
-                                                <textarea value={address} onChange={(e) => setAddress(e.target.value)} className="form-control" placeholder="Ex: PO Box 232, Lilongwe, Malawi"  ></textarea>
+                                                <label>Branch Address</label>
+                                                <textarea value={address} onChange={(e) => setAddress(e.target.value)}
+                                                          className="form-control"
+                                                          placeholder="Ex: PO Box 232, Lilongwe, Malawi"></textarea>
                                             </div>
                                         </div>
 
@@ -184,7 +191,8 @@ function AddBranch(props) {
                     </div>
                 </div>
             </div>
-            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType} handleAlertClose={handleAlertClose} />
+            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType}
+                   handleAlertClose={handleAlertClose}/>
         </div>
     );
 }

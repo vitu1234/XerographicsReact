@@ -20,7 +20,9 @@ class InvoiceController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
+        $this->middleware('auth:api');
+
     }
 
     public function index()
@@ -31,7 +33,7 @@ class InvoiceController extends Controller
          // handle fetch all branch sales ajax request
     public function fetchAllBranchSales() {
         // echo "df";
-        $user_id = auth()->user()->id; 
+        $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $role = $user->role;
         $user_branch = UserBranch::where('userid',$user_id)->first()->branch_id;
@@ -124,9 +126,9 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $id = $request->id;
-        
 
-        
+
+
     }
 
     /**

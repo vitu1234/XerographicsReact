@@ -73,13 +73,7 @@ function UserDetails(props) {
         console.log(state)
 
         api.put('/updateUser'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 // console.log(response.data)
@@ -112,12 +106,7 @@ function UserDetails(props) {
     // retrieve user data
     const retrieveData = () => {
         api.get('/editUser/' + user.id + ''
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
                 // console.log(response.data)

@@ -56,13 +56,7 @@ function AddCategory(props) {
         console.log(state)
 
         api.post('/saveCategory'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 setLoadingProgress(false)

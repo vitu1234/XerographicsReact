@@ -51,12 +51,7 @@ function Units() {
     // retrieve customers
     const retrieveUnits = () => {
         api.get('/fetchAllUnits'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
                 // console.log(response.data)
@@ -89,12 +84,7 @@ function Units() {
         if (del_id > 0) {
             console.log("ID: " + del_id);
             api.delete('/deleteUnit/' + del_id + ''
-                , {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                }
+
             )
                 .then(function (response) {
                     // console.log(response.data)

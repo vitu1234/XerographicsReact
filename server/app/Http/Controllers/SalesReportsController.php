@@ -20,10 +20,12 @@ class SalesReportsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    
+
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
+        $this->middleware('auth:api');
+
     }
 
     public function index()
@@ -37,7 +39,7 @@ class SalesReportsController extends Controller
             'users' => $users
         );
 
-        return view('reports.user_reports')->with($data);  
+        return view('reports.user_reports')->with($data);
     }
 
     public function filterUserReports(Request $request){
@@ -74,7 +76,7 @@ class SalesReportsController extends Controller
                 $amount = "MWK ".number_format($sale->total_amount,2);
 
                 $new_date = date('Y-m-d', strtotime($sale->created_at));
-                    
+
 
                 $output.='
 
@@ -136,7 +138,7 @@ class SalesReportsController extends Controller
             'branches' => $branches
         );
 
-        return view('reports.branch_reports')->with($data);  
+        return view('reports.branch_reports')->with($data);
     }
 
     public function fetchAllBranchSales(Request $request){
@@ -173,7 +175,7 @@ class SalesReportsController extends Controller
                 $amount = "MWK ".number_format($sale->total_amount,2);
 
                 $new_date = date('Y-m-d', strtotime($sale->created_at));
-                    
+
 
                 $output.='
 
@@ -234,13 +236,13 @@ class SalesReportsController extends Controller
             'categories' => $categories
         );
 
-        return view('reports.category_reports')->with($data);  
+        return view('reports.category_reports')->with($data);
     }
 
     public function fetchAllCategorySales(Request $request){
         $selected_category_id = $request->input('filter_category');
         $products = Product::where('category_id',$selected_category_id)->get();
-       
+
 
         $start_date = date($request->input('filter_user_start')." 00:00:00");
         $end_date = date($request->input('filter_user_end')." 23:59:59");
@@ -256,7 +258,7 @@ class SalesReportsController extends Controller
                 $invoice_details = InvoiceDetails::where('product_id',$product_id)
                         ->get()->groupBy('invoice_id');
                 if ($invoice_details->count() > 0) {
-                    
+
                     foreach($invoice_details as $invoice_detail){
                         $invoice_id = $invoice_detail[0]->invoice_id;
 
@@ -272,9 +274,9 @@ class SalesReportsController extends Controller
             // echo "</pre>";
             // die();
             $filtered_invoice_ids = array_values(array_unique($invoice_ids));
-           
-            for ($y=0; $y < count($filtered_invoice_ids); $y++) { 
-                $invoice[$y] =Invoice::find($filtered_invoice_ids[$y]); 
+
+            for ($y=0; $y < count($filtered_invoice_ids); $y++) {
+                $invoice[$y] =Invoice::find($filtered_invoice_ids[$y]);
             }
 
             $output = '';
@@ -301,7 +303,7 @@ class SalesReportsController extends Controller
                 $amount = "MWK ".number_format($sale->total_amount,2);
 
                 $new_date = date('Y-m-d', strtotime($sale->created_at));
-                    
+
 
                 $output.='
 
@@ -382,14 +384,14 @@ class SalesReportsController extends Controller
         //         $amount = "MWK ".number_format($sale->total_amount,2);
 
         //         $new_date = date('Y-m-d', strtotime($sale->created_at));
-                    
+
 
         //         $output.='
 
         //         <tr>
         //         <td >
         //         #'.$sale_id.'
-        //         </td> 
+        //         </td>
         //         <th scope="row">
         //         <div class="media align-items-center">
         //         <div class="media-body">
@@ -400,16 +402,16 @@ class SalesReportsController extends Controller
 
         //         <td >
         //         '.$customer_name.'
-        //         </td> 
+        //         </td>
         //         <td >
         //         '.$name.'
         //         </td>
         //         <td >
         //         '.$new_date.'
-        //         </td>  
+        //         </td>
         //         <td >
         //         '.$amount.'
-        //         </td>               
+        //         </td>
         //         <td class="text-right">
         //         <div class="dropdown">
         //         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

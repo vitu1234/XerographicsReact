@@ -51,13 +51,7 @@ function AddUnit(props) {
         console.log(state)
 
         api.post('/saveUnit'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 // console.log(response.data)

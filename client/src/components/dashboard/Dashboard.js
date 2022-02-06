@@ -6,9 +6,9 @@ import TopBar from "../incl/TopBar";
 
 function Dashboard() {
     const navigate = useNavigate()
-    if (sessionStorage.getItem("jwt_token") === null) {
-        navigate('/login')
-    }
+    // if (sessionStorage.getItem("jwt_token") === null) {
+    //     navigate('/login')
+    // }
     return (
 
         <div>

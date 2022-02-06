@@ -24,7 +24,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+//        $this->middleware('auth');
+        $this->middleware('auth:api');
+
     }
 
     /**
@@ -58,7 +60,7 @@ class HomeController extends Controller
         $years = range(2000, strftime("%Y",time()));
         echo '<select>';
 
-        foreach ($years as $year) { 
+        foreach ($years as $year) {
             echo "<option>".$year." YEar"."</option>";
         }
         echo "<option selected value='".strftime("%Y",time())."'>".strftime("%Y",time())." YEar"."</option>";

@@ -146,12 +146,7 @@ function AddProduct() {
     const retrieveData = () => {
         setLoadingProgress(true)
         api.get('/fetchAllBranches'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
                 setLoadingProgress(false)

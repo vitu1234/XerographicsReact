@@ -66,13 +66,7 @@ function BranchDetails(props) {
         console.log(state)
 
         api.put('/updateBranch'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 setLoadingProgress(false)

@@ -155,12 +155,7 @@ function ProductDetails(props) {
     // retrieve data
     const retrieveData = () => {
         api.get('/fetchAllBranches'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
                 // console.log(response.data)

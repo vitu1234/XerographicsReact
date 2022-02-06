@@ -69,13 +69,7 @@ function AddUser() {
         console.log(state)
 
         api.post('/saveUser'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 // console.log(response.data)
@@ -108,12 +102,7 @@ function AddUser() {
     // retrieve branches
     const retrieveBranches = () => {
         api.get('/fetchAllBranches'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
                 // console.log(response.data)

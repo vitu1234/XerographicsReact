@@ -56,13 +56,7 @@ function BrandDetails(props) {
         console.log(state)
 
         api.put('/updateBrand'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 setLoadingProgress(false)

@@ -53,13 +53,6 @@ function Branches() {
     const retrieveBranches = () => {
         setLoadingProgress(true)
         api.get('/fetchAllBranches'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': 'bearer ' + sessionStorage.getItem('jwt_token')
-                }
-            }
         )
             .then(function (response) {
                 setLoadingProgress(false)
@@ -95,13 +88,7 @@ function Branches() {
             setLoadingProgress(true)
             console.log("ID: " + del_id);
             api.delete('/deleteBranch/' + del_id + ''
-                , {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'Authorization': 'bearer ' + sessionStorage.getItem('jwt_token')
-                    }
-                }
+
             )
                 .then(function (response) {
                     setLoadingProgress(false)

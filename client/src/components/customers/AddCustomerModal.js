@@ -61,13 +61,7 @@ export default function AddCustomerModal(props) {
         console.log(state)
 
         api.post('/saveCustomer'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 // console.log(response.data)

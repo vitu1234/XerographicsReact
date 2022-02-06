@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import {Link} from "react-router-dom";
+import {useEffect, useState} from 'react';
 import React from "react";
 import ProductListRow from "./ProductListRow";
 import api from "../../api/api";
@@ -36,7 +36,6 @@ function Products() {
     const [dialogMessage, setDialogMessage] = useState("");
 
 
-
     const handleAlertClose = () => {
         setOpen(false);
         setAlertMessage('')
@@ -55,12 +54,6 @@ function Products() {
         setLoadingProgress(true)
 
         api.get('/fetchAllProducts'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
         )
             .then(function (response) {
                 // console.log(response.data)
@@ -151,14 +144,15 @@ function Products() {
 
     const renderProductList = products.map((product) => {
         return (
-            <ProductListRow key={`d${product.id}`} product={product} getDeleteProductId={handleClickOpen} ></ProductListRow>
+            <ProductListRow key={`d${product.id}`} product={product}
+                            getDeleteProductId={handleClickOpen}></ProductListRow>
         );
     })
     const loading = () => {
         if (loadingProgress) {
             return (
                 <div className="mb-3">
-                    <LinearProgressLoad />
+                    <LinearProgressLoad/>
                 </div>
             )
         }
@@ -172,15 +166,17 @@ function Products() {
                             <div className="col-lg-6 col-7">
                                 <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                     <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                        <li className="breadcrumb-item"><Link to={"/"}><i className="fas fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/"}><i
+                                            className="fas fa-home"></i></Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Products</li>
                                     </ol>
                                 </nav>
                             </div>
                             <div className="col-lg-6 col-5 text-right">
-                                <Link to={'/products/product_brands'} type="button" className="btn btn-sm btn-neutral">Product Brands</Link>
+                                <Link to={'/products/product_brands'} type="button" className="btn btn-sm btn-neutral">Product
+                                    Brands</Link>
 
-                                <Link to={'addProduct'} >
+                                <Link to={'addProduct'}>
                                     <button type="button" className="btn btn-sm btn-neutral my-1">New Product</button>
                                 </Link>
 
@@ -198,20 +194,20 @@ function Products() {
                         <div className="card">
                             {loading()}
                             <div className="table-responsive mt-4" id="">
-                                <table className="table table-hover mt-3 " id="users_tbl" >
+                                <table className="table table-hover mt-3 " id="users_tbl">
                                     <thead className="thead">
-                                        <tr>
-                                            <th >Name</th>
-                                            <th >Branch</th>
-                                            <th >Category</th>
-                                            <th >Unit</th>
-                                            <th >Price</th>
-                                            <th >Qty</th>
-                                            <th >Action</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Branch</th>
+                                        <th>Category</th>
+                                        <th>Unit</th>
+                                        <th>Price</th>
+                                        <th>Qty</th>
+                                        <th>Action</th>
+                                    </tr>
                                     </thead>
                                     <tbody className="">
-                                        {renderProductList}
+                                    {renderProductList}
                                     </tbody>
                                 </table>
                             </div>
@@ -221,8 +217,10 @@ function Products() {
                 </div>
             </div>
 
-            <Dialogs dialogOpen={dialogOpen} dialogAction={dialogAction} dialogTitle={dialogTitle} dialogMessage={dialogMessage} handleDialogClose={handleDialogClose} />
-            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType} handleAlertClose={handleAlertClose} />
+            <Dialogs dialogOpen={dialogOpen} dialogAction={dialogAction} dialogTitle={dialogTitle}
+                     dialogMessage={dialogMessage} handleDialogClose={handleDialogClose}/>
+            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType}
+                   handleAlertClose={handleAlertClose}/>
         </div>
     );
 }

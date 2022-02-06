@@ -53,17 +53,11 @@ function UnitDetails(props) {
         console.log(state)
 
         api.put('/updateUnit'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 // console.log(response.data)
-                if (response.data.error == false) {
+                if (response.data.error === false) {
 
                     // console.log(response.data.users)
                     // return response.data.users;

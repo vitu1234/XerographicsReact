@@ -55,6 +55,8 @@ function App() {
 
             })
             .catch(function (error) {
+                sessionStorage.removeItem('status')
+                sessionStorage.removeItem('jwt_token')
                 if (error.response.status === 401) {
                     //place your reentry code
                     console.log('Unauthorised')
@@ -68,6 +70,7 @@ function App() {
     }
 
     useEffect(() => {
+        checkLoginStatus();
         if (sessionStorage.getItem('jwt_token') !== null) {
             navigate('/')
         } else {
@@ -79,11 +82,12 @@ function App() {
         return (
             <div id="bg-default">
 
+                <TopBar/>
 
+                <SideBar/>
                 <div className='main-content ss ' id='panel'>
 
-                    <TopBar/>
-                    <SideBar/>
+
                     <Routes>
 
                         <Route path='/login'

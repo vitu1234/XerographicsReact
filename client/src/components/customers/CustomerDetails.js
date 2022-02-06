@@ -58,13 +58,7 @@ function CustomerDetails(props) {
         console.log(state)
 
         api.put('/updateCustomer'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 // console.log(response.data)

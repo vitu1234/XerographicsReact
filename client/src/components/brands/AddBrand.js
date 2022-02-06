@@ -54,13 +54,7 @@ function AddBrand(props) {
         console.log(state)
 
         api.post('/saveBrand'
-            , state, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-
-            }
-        }
+            , state
         )
             .then(function (response) {
                 setLoadingProgress(false)

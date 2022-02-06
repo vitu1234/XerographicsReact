@@ -160,13 +160,6 @@ function Pos() {
         setLoadingProgress(true)
 
         api.get(products_url
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }, credentials: 'include'
-
-            }
         )
             .then(function (response) {
                 // console.log(response.data)
@@ -201,12 +194,7 @@ function Pos() {
         setLoadingProgress(true)
 
         api.get('/fetchAllCategories'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
                 if (response.data.error === false) {
@@ -236,12 +224,7 @@ function Pos() {
     const retrieveCustomers = () => {
 
         api.get('/fetchAllCustomers'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
 
@@ -266,12 +249,7 @@ function Pos() {
     const retrieveTax = () => {
 
         api.get('/fetchActiveTax'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
 
@@ -314,13 +292,7 @@ function Pos() {
         setLoadingProgress(true)
 
         api.post('/saveInvoice'
-            , data, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-
-                }
-            }
+            , data
         )
             .then(function (response) {
                 setLoadingProgress(false)

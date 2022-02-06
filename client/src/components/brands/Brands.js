@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import {Link} from "react-router-dom";
+import {useEffect, useState} from 'react';
 import React from "react";
 import BrandListRow from "./BrandListRow";
 import api from "../../api/api";
@@ -36,7 +36,6 @@ function Brands() {
     const [dialogMessage, setDialogMessage] = useState("");
 
 
-
     const handleAlertClose = () => {
         setOpen(false);
         setAlertMessage('')
@@ -55,12 +54,6 @@ function Brands() {
         setLoadingProgress(true)
 
         api.get('/fetchAllBrands'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
         )
             .then(function (response) {
                 setLoadingProgress(false)
@@ -99,12 +92,7 @@ function Brands() {
 
             console.log("ID: " + del_id);
             api.delete('/deleteBrand/' + del_id + ''
-                , {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                }
+
             )
                 .then(function (response) {
                     setLoadingProgress(false)
@@ -151,7 +139,7 @@ function Brands() {
 
     const renderBrandList = brands.map((brand) => {
         return (
-            <BrandListRow key={brand.id} brand={brand} getDeleteBrandId={handleClickOpen} ></BrandListRow>
+            <BrandListRow key={brand.id} brand={brand} getDeleteBrandId={handleClickOpen}></BrandListRow>
         );
     })
 
@@ -159,7 +147,7 @@ function Brands() {
         if (loadingProgress) {
             return (
                 <div className="mb-3">
-                    <LinearProgressLoad />
+                    <LinearProgressLoad/>
                 </div>
             )
         }
@@ -174,15 +162,17 @@ function Brands() {
                             <div className="col-lg-6 col-7">
                                 <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                     <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                        <li className="breadcrumb-item"><Link to={"/"}><i className="fas fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item " aria-current="page"><Link to={"/products"}>Products</Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/"}><i
+                                            className="fas fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item " aria-current="page"><Link
+                                            to={"/products"}>Products</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Brands</li>
                                     </ol>
                                 </nav>
                             </div>
                             <div className="col-lg-6 col-5 text-right">
 
-                                <Link to={'/products/product_brands/AddProductBrand'} >
+                                <Link to={'/products/product_brands/AddProductBrand'}>
                                     <button type="button" className="btn btn-sm btn-neutral my-1">New Brand</button>
                                 </Link>
 
@@ -200,16 +190,16 @@ function Brands() {
                         <div className="card">
                             {loading()}
                             <div className="table-responsive mt-4" id="">
-                                <table className="table table-hover mt-3 " id="users_tbl" >
+                                <table className="table table-hover mt-3 " id="users_tbl">
                                     <thead className="thead">
-                                        <tr>
-                                            <th >Brand Name</th>
+                                    <tr>
+                                        <th>Brand Name</th>
 
-                                            <th >Action</th>
-                                        </tr>
+                                        <th>Action</th>
+                                    </tr>
                                     </thead>
                                     <tbody className="">
-                                        {renderBrandList}
+                                    {renderBrandList}
                                     </tbody>
                                 </table>
                             </div>
@@ -219,8 +209,10 @@ function Brands() {
                 </div>
             </div>
 
-            <Dialogs dialogOpen={dialogOpen} dialogAction={dialogAction} dialogTitle={dialogTitle} dialogMessage={dialogMessage} handleDialogClose={handleDialogClose} />
-            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType} handleAlertClose={handleAlertClose} />
+            <Dialogs dialogOpen={dialogOpen} dialogAction={dialogAction} dialogTitle={dialogTitle}
+                     dialogMessage={dialogMessage} handleDialogClose={handleDialogClose}/>
+            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType}
+                   handleAlertClose={handleAlertClose}/>
         </div>
     );
 }

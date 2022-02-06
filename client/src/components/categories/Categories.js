@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import {Link} from "react-router-dom";
+import {useEffect, useState} from 'react';
 import React from "react";
 import CategoryListRow from "./CategoryListRow";
 import api from "../../api/api";
@@ -36,7 +36,6 @@ function Categories() {
     const [dialogMessage, setDialogMessage] = useState("");
 
 
-
     const handleAlertClose = () => {
         setOpen(false);
         setAlertMessage('')
@@ -55,12 +54,7 @@ function Categories() {
         setLoadingProgress(true)
 
         api.get('/fetchAllCategories'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
                 setLoadingProgress(false)
@@ -99,12 +93,6 @@ function Categories() {
 
             console.log("ID: " + del_id);
             api.delete('/deleteCategory/' + del_id + ''
-                , {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                }
             )
                 .then(function (response) {
                     // console.log(response.data)
@@ -148,7 +136,8 @@ function Categories() {
 
     const renderCategoryList = categories.map((category) => {
         return (
-            <CategoryListRow key={category.id} category={category} getDeleteCategoryId={handleClickOpen} ></CategoryListRow>
+            <CategoryListRow key={category.id} category={category}
+                             getDeleteCategoryId={handleClickOpen}></CategoryListRow>
         );
     })
 
@@ -156,7 +145,7 @@ function Categories() {
         if (loadingProgress) {
             return (
                 <div className="mb-3">
-                    <LinearProgressLoad />
+                    <LinearProgressLoad/>
                 </div>
             )
         }
@@ -172,14 +161,15 @@ function Categories() {
                             <div className="col-lg-6 col-7">
                                 <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                     <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                        <li className="breadcrumb-item"><Link to={"/"}><i className="fas fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/"}><i
+                                            className="fas fa-home"></i></Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Categories</li>
                                     </ol>
                                 </nav>
                             </div>
                             <div className="col-lg-6 col-5 text-right">
 
-                                <Link to={'addCategory'} >
+                                <Link to={'addCategory'}>
                                     <button type="button" className="btn btn-sm btn-neutral my-1">New Category</button>
                                 </Link>
 
@@ -197,16 +187,16 @@ function Categories() {
                         <div className="card">
                             {loading()}
                             <div className="table-responsive mt-4" id="">
-                                <table className="table table-hover mt-3 " id="users_tbl" >
+                                <table className="table table-hover mt-3 " id="users_tbl">
                                     <thead className="thead">
-                                        <tr>
-                                            <th >Category Name</th>
-                                            <th >Category Description</th>
-                                            <th >Action</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Category Name</th>
+                                        <th>Category Description</th>
+                                        <th>Action</th>
+                                    </tr>
                                     </thead>
                                     <tbody className="">
-                                        {renderCategoryList}
+                                    {renderCategoryList}
                                     </tbody>
                                 </table>
                             </div>
@@ -216,8 +206,10 @@ function Categories() {
                 </div>
             </div>
 
-            <Dialogs dialogOpen={dialogOpen} dialogAction={dialogAction} dialogTitle={dialogTitle} dialogMessage={dialogMessage} handleDialogClose={handleDialogClose} />
-            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType} handleAlertClose={handleAlertClose} />
+            <Dialogs dialogOpen={dialogOpen} dialogAction={dialogAction} dialogTitle={dialogTitle}
+                     dialogMessage={dialogMessage} handleDialogClose={handleDialogClose}/>
+            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType}
+                   handleAlertClose={handleAlertClose}/>
         </div>
     );
 }

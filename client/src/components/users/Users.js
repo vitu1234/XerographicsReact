@@ -51,12 +51,7 @@ function Users() {
     // retrieve users
     const retrieveUsers = () => {
         api.get('/fetchAllUsers'
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+
         )
             .then(function (response) {
                 // console.log(response.data)
@@ -89,12 +84,7 @@ function Users() {
         if (del_id > 0) {
             // console.log("ID: " + id);
             api.delete('/deleteUser/' + del_id + ''
-                , {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                }
+
             )
                 .then(function (response) {
                     // console.log(response.data)

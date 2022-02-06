@@ -2,20 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e54e9d0-ebba-4007-9019-6ca340dd1677" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/src/components/Login/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/0.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/23.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/23.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/26.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/26.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/28.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/28.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/39.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/39.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/41.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/41.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/42.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/42.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/43.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/43.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/1.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/2.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/3.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/4.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/4.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/5.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/5.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/6.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/6.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/index.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/pos/Pos.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/pos/Pos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/api/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/dashboard/Dashboard.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +162,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../practice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunAnythingCache">
@@ -218,7 +217,10 @@
       <workItem from="1643117796658" duration="1829000" />
       <workItem from="1643268578027" duration="687000" />
       <workItem from="1643341018469" duration="5945000" />
-      <workItem from="1643402978357" duration="14197000" />
+      <workItem from="1643402978357" duration="14579000" />
+      <workItem from="1643673786389" duration="821000" />
+      <workItem from="1644136423654" duration="592000" />
+      <workItem from="1644167978662" duration="1998000" />
     </task>
     <task id="LOCAL-00001" summary="changing to api mode">
       <created>1640544517100</created>
