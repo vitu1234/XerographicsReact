@@ -46,7 +46,7 @@ function Login(props) {
     }
     const LoginHandler = (state) => {
 
-        api.post('api/auth/login'
+        api.post('auth/login'
             , state, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +67,13 @@ function Login(props) {
                     setOpen(true)
                     sessionStorage.setItem("jwt_token", response.data.access_token);
                     sessionStorage.setItem("status", true);
-                    navigate('/')
+                    sessionStorage.setItem("app_type", response.data.person);
+                    sessionStorage.setItem("branch", response.data.branch);
+
+                    // navigate('/')
+                    setTimeout(() => {
+                        window.location = "/";
+                    }, 300)
 
 
                 } else {

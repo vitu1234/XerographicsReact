@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from 'react';
 import React from "react";
 import BranchListRow from "./BranchListRow";
@@ -9,6 +9,8 @@ import LinearProgressLoad from "../alerts/LinearProgress";
 
 
 function Branches() {
+    const navigate = useNavigate();
+
     //user state
     const [branches, setBranches] = useState([])
     const [del_id, setId] = useState(-1)
@@ -28,7 +30,6 @@ function Branches() {
         setId(id)
     };
 
-
     const [alertType, setAlertType] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
 
@@ -47,6 +48,7 @@ function Branches() {
         setDialogTitle('')
         setDialogMessage('')
     };
+
 
 
     // retrieve branches
@@ -74,9 +76,22 @@ function Branches() {
             })
             .catch(function (error) {
                 setLoadingProgress(false)
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error")
-                setOpen(true)
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
@@ -88,7 +103,6 @@ function Branches() {
             setLoadingProgress(true)
             console.log("ID: " + del_id);
             api.delete('/deleteBranch/' + del_id + ''
-
             )
                 .then(function (response) {
                     setLoadingProgress(false)
@@ -114,12 +128,24 @@ function Branches() {
                     }
 
                 })
-                .catch(function (myJson) {
+                .catch(function (error) {
                     setLoadingProgress(false)
-                    console.log(myJson);
-                    setAlertType('error')
-                    setAlertMessage("Error 500: Internal server error")
-                    setOpen(true)
+                    if (error.response.status === 401) {
+                        navigate('/login')
+                        //place your reentry code
+                        console.log('Unauthorised')
+                        sessionStorage.removeItem('status')
+                        sessionStorage.removeItem('jwt_token')
+                        setAlertType('error')
+                        setAlertMessage("Error 401: Unauthorised user")
+                        setOpen(true)
+                    } else {
+                        console.log('unknown error')
+                        window.sessionStorage.setItem('status', false)
+                        setAlertType('error')
+                        setAlertMessage("Error 500: Internal server error")
+                        setOpen(true)
+                    }
                 });
         } else {
 

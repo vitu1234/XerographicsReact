@@ -138,7 +138,8 @@ function Customers() {
                             <div className="col-lg-6 col-7">
                                 <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                     <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                        <li className="breadcrumb-item"><a href="/"><i className="fas fa-home"></i></a>
+                                        <li className="breadcrumb-item"><Link to={"/"}><i
+                                            className="fas fa-home"></i></Link>
                                         </li>
                                         <li className="breadcrumb-item active" aria-current="page"><Link
                                             to={'/users'}> Users</Link></li>

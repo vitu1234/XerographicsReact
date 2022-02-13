@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
+
+    Route::post('login', 'App\Http\Controllers\AuthController@login');
+    Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+    Route::get('refresh', 'App\Http\Controllers\AuthController@refresh');
+    Route::get('user', 'App\Http\Controllers\AuthController@me');
+
+});
+
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -104,7 +113,7 @@ Route::put('/updateBranch', ['App\Http\Controllers\BranchesController', 'update'
 //all products control
 Route::resource('products', 'App\Http\Controllers\ProductController');
 //get all products
-Route::get('showImage/{id}',['App\Http\Controllers\ProductController', 'showImage'])->name('showImage');
+Route::get('showImage/{id}', ['App\Http\Controllers\ProductController', 'showImage'])->name('showImage');
 Route::get('/fetchAllProducts', ['App\Http\Controllers\ProductController', 'fetchAllProducts'])->name('fetchAllProducts');
 // add product
 Route::post('/saveProduct', ['App\Http\Controllers\ProductController', 'store'])->name('saveProduct');
@@ -142,7 +151,7 @@ Route::resource('settings', 'App\Http\Controllers\SystemSettingsController');
 
 //PROFILE ROUTES
 //all profile control
-Route::get('/fetchActiveTax',  ['App\Http\Controllers\TaxController', 'fetchActiveTax'])->name('fetchActiveTax');
+Route::get('/fetchActiveTax', ['App\Http\Controllers\TaxController', 'fetchActiveTax'])->name('fetchActiveTax');
 
 // ===========================================================================
 
@@ -174,6 +183,7 @@ Route::get('/fetchAllBranchSales', ['App\Http\Controllers\InvoiceController', 'f
 Route::resource('reports/user', 'App\Http\Controllers\SalesReportsController');
 // filter user sales
 Route::post('/filterUserReports', ['App\Http\Controllers\SalesReportsController', 'filterUserReports'])->name('filterUserReports');
+Route::get('/invoice_details/{invoice_id}', ['App\Http\Controllers\SalesReportsController', 'invoice_details'])->name('invoice_details');
 
 // filter branch sales
 Route::get('reports/branch', ['App\Http\Controllers\SalesReportsController', 'branch_reports'])->name('branch_reports');

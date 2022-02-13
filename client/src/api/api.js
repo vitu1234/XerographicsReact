@@ -1,9 +1,9 @@
 import axios from 'axios';
-import BaseUrl from './baseUrl';
+import BaseUrlApi from './baseUrlApi';
 
 // const url = "http://xerographics.test"
 const defaultOptions = {
-    baseURL: BaseUrl,
+    baseURL: BaseUrlApi,
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

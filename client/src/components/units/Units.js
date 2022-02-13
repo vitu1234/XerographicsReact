@@ -54,7 +54,7 @@ function Units() {
 
         )
             .then(function (response) {
-                // console.log(response.data)
+                console.log(response.data)
                 if (response.data.error === false) {
 
                     // console.log(response.data.users)

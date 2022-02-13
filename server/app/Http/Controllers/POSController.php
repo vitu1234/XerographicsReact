@@ -244,8 +244,19 @@ class POSController extends Controller
     {
         $data = $request->all();
 
-        $sale_by = 1;//replace after adding auth
-        $branch_id = 1;
+        $sale_by = auth()->user()->id;//replace after adding auth
+
+        //get user branch
+        $user_branch = DB::connection('mysql')->select(
+            'SELECT * 
+                    FROM user_branches
+                    WHERE userid = :user_id
+                    ',
+            [
+                'user_id' => $sale_by
+            ]
+        );
+        $branch_id = $user_branch[0]->branch_id;
 
         $amount_paid = $data['amount_paid'];
 //        $customerId = $data['customerId'];

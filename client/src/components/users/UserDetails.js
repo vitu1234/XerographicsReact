@@ -1,12 +1,15 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import {Link, useNavigate, useLocation} from "react-router-dom";
+import {useEffect, useState} from 'react';
 import api from "../../api/api";
 import Alert from "../alerts/alert";
+import LinearProgressLoad from "../alerts/LinearProgress";
 
 
 function UserDetails(props) {
     const location = useLocation()
     const user = location.state.user;
+    const user_type = sessionStorage.getItem('app_type')
+    const app_user_branch = sessionStorage.getItem('branch')
     // console.log(user)
 
     const navigate = useNavigate();
@@ -21,7 +24,7 @@ function UserDetails(props) {
 
     const [dialogTitle, setDialogTitle] = useState("");
     const [dialogMessage, setDialogMessage] = useState("");
-
+    const [loadingProgress, setLoadingProgress] = useState(false);
 
 
     const handleAlertClose = () => {
@@ -58,6 +61,7 @@ function UserDetails(props) {
                 euser_id: user.id,
                 epassword: password
             }
+            setLoadingProgress(true)
             AddUserHandler(state)
             setfirstName(user.firstname) // clear form fields 
             setLastName(user.lastname) // clear form fields 
@@ -76,6 +80,7 @@ function UserDetails(props) {
             , state
         )
             .then(function (response) {
+                setLoadingProgress(false)
                 // console.log(response.data)
                 if (response.data.error == false) {
 
@@ -84,7 +89,9 @@ function UserDetails(props) {
                     setAlertType('success')
                     setAlertMessage(response.data.message)
                     setOpen(true)
-                    setTimeout(() => { navigate('/users'); }, 1000)
+                    setTimeout(() => {
+                        navigate('/users');
+                    }, 1000)
 
                 } else {
                     // console.log(response.data.message)
@@ -96,21 +103,37 @@ function UserDetails(props) {
 
             })
             .catch(function (error) {
+                setLoadingProgress(false)
                 console.log(error);
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error")
-                setOpen(true)
+
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
     // retrieve user data
     const retrieveData = () => {
         api.get('/editUser/' + user.id + ''
-
         )
             .then(function (response) {
+                setLoadingProgress(false)
                 // console.log(response.data)
-                if (response.data.error == false) {
+                if (response.data.error === false) {
 
                     // console.log(response.data)
                     setBranches(response.data.branches)
@@ -128,36 +151,73 @@ function UserDetails(props) {
                 }
 
             })
-            .catch(function (myJson) {
-                // console.log(myJson);
-                setAlertType('error')
-                setAlertMessage('Error 500: Internal server error')
-                setOpen(true)
+            .catch(function (error) {
+                setLoadingProgress(false)
+                console.log(error);
+
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
 
-
     useEffect(() => {
-
+        setLoadingProgress(true)
         retrieveData();
     }, [])
 
     const renderBranchList = branches.map((branch) => {
         return (
-            <option key={branch.id} value={branch.id} >{branch.branch_name}</option>
+            <option key={branch.id} value={branch.id}>{branch.branch_name}</option>
         );
     })
+
+    const renderBranchList2 = branches.map((branch) => {
+        if (branch.id == app_user_branch) {
+            return (
+                <option key={branch.id} value={branch.id}>{branch.branch_name}</option>
+            );
+        }
+
+    })
+
+    const loading = () => {
+        if (loadingProgress) {
+            return (
+                <div className="mb-3">
+                    <LinearProgressLoad/>
+                </div>
+            )
+        }
+    }
 
     const StatusUser = () => {
         // console.log(userStatus)
         if (userStatus === 'Active') {
             return (
                 <div className="" role="group" aria-label="Basic radio toggle button group">
-                    <input onClick={(e) => setUserStatus(e.target.value)} value="Active" type="radio" className="btn-check" name="user_status" id="user_status1" autocomplete="off" defaultChecked />
+                    <input onClick={(e) => setUserStatus(e.target.value)} value="Active" type="radio"
+                           className="btn-check" name="user_status" id="user_status1" autocomplete="off"
+                           defaultChecked/>
                     <label className="btn btn-sm btn-outline-primary " for="user_status1">Active</label>
 
-                    <input onClick={(e) => setUserStatus(e.target.value)} value="Inactive" type="radio" className="btn-check btn-danger" name="user_status" id="user_status2" autocomplete="off" />
+                    <input onClick={(e) => setUserStatus(e.target.value)} value="Inactive" type="radio"
+                           className="btn-check btn-danger" name="user_status" id="user_status2" autocomplete="off"/>
                     <label className="btn btn-sm btn-danger " for="user_status2">Inactive</label>
 
                 </div>
@@ -165,10 +225,13 @@ function UserDetails(props) {
         } else {
             return (
                 <div className="" role="group" aria-label="Basic radio toggle button group">
-                    <input onClick={(e) => setUserStatus(e.target.value)} value="Active" type="radio" className="btn-check" name="user_status" id="user_status1" autocomplete="off" />
+                    <input onClick={(e) => setUserStatus(e.target.value)} value="Active" type="radio"
+                           className="btn-check" name="user_status" id="user_status1" autocomplete="off"/>
                     <label className="btn btn-sm btn-outline-primary " for="user_status1">Active</label>
 
-                    <input onClick={(e) => setUserStatus(e.target.value)} value="Inactive" type="radio" className="btn-check btn-danger" name="user_status" id="user_status2" autocomplete="off" defaultChecked />
+                    <input onClick={(e) => setUserStatus(e.target.value)} value="Inactive" type="radio"
+                           className="btn-check btn-danger" name="user_status" id="user_status2" autocomplete="off"
+                           defaultChecked/>
                     <label className="btn btn-sm btn-danger " for="user_status2">Inactive</label>
 
                 </div>
@@ -186,9 +249,13 @@ function UserDetails(props) {
                                 <div className="col-lg-6 col-7">
                                     <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                         <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                            <li className="breadcrumb-item"><Link to={"/"}><i className="fas fa-home"></i></Link></li>
-                                            <li className="breadcrumb-item active" aria-current="page"><Link to={'/users'}>Users</Link></li>
-                                            <li className="breadcrumb-item active" aria-current="page">Edit User Details</li>
+                                            <li className="breadcrumb-item"><Link to={"/"}><i
+                                                className="fas fa-home"></i></Link></li>
+                                            <li className="breadcrumb-item active" aria-current="page"><Link
+                                                to={'/users'}>Users</Link></li>
+                                            <li className="breadcrumb-item active" aria-current="page">Edit User
+                                                Details
+                                            </li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -204,56 +271,98 @@ function UserDetails(props) {
                     <div className="col">
                         <div className="card">
                             <div className="container-fluid mt-5">
+                                {loading()}
                                 <form onSubmit={updateUser}>
 
-                                    <input type="hidden" name="euser_id" id="euser_id" value={user.id} required />
+                                    <input type="hidden" name="euser_id" id="euser_id" value={user.id} required/>
 
                                     <div className="row">
                                         <div className=" col-md-6">
                                             <div className="form-group">
-                                                <label >User role <span className='text-danger'>*</span></label>
-                                                <select value={user_Role} onChange={(e) => setUserRole(e.target.value)} className="form-control" name="eurole" id="eurole" required>
-                                                    <option value="admin">Admin</option>
-                                                    <option value="manager">Manager</option>
-                                                    <option value="shop_user">Assistant</option>
-                                                </select>
+                                                <label>User role <span className='text-danger'>*</span></label>
+
+
+                                                {
+                                                    (user_type === '101') ?
+                                                        <select value={user_Role}
+                                                                onChange={(e) => setUserRole(e.target.value)}
+                                                                className="form-control" name="eurole" id="eurole"
+                                                                required>
+                                                            <option disabled value=''>-select-</option>
+                                                            <option value="admin">Admin</option>
+                                                            <option value="manager">Manager</option>
+                                                            <option value="assistant">Assistant</option>
+                                                        </select>
+                                                        :
+                                                        <select value={user_Role}
+                                                                onChange={(e) => setUserRole(e.target.value)}
+                                                                className="form-control" name="eurole" id="eurole"
+                                                                required>
+                                                            <option disabled value=''>-select-</option>
+                                                            <option value="manager">Manager</option>
+                                                            <option value="assistant">Assistant</option>
+                                                        </select>
+                                                }
+
+                                                {/*<select value={user_Role} onChange={(e) => setUserRole(e.target.value)}*/}
+                                                {/*        className="form-control" name="eurole" id="eurole" required>*/}
+                                                {/*    <option value="admin">Admin</option>*/}
+                                                {/*    <option value="manager">Manager</option>*/}
+                                                {/*    <option value="shop_user">Assistant</option>*/}
+                                                {/*</select>*/}
                                             </div>
                                         </div>
 
                                         <div className=" col-md-6">
                                             <div className="form-group">
-                                                <label >Branch <span className='text-danger'>*</span></label>
-                                                <select value={user_branch} onChange={(e) => setUserBranch(e.target.value)} className="form-control" name="eubranch" id="eubranch" required>
-                                                    {renderBranchList}
+                                                <label>Branch <span className='text-danger'>*</span></label>
+                                                <select value={user_branch}
+                                                        onChange={(e) => setUserBranch(e.target.value)}
+                                                        className="form-control" name="eubranch" id="eubranch" required>
+                                                    {
+                                                        (user_type === '101')
+                                                            ?
+                                                            renderBranchList
+                                                            :
+                                                            renderBranchList2
+                                                    }
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <label >Firstname <span className='text-danger'>*</span></label>
-                                                <input value={firstName} onChange={(e) => setfirstName(e.target.value)} type="text" className="form-control" name="efname" id="efname" placeholder="Ex: John" required />
+                                                <label>Firstname <span className='text-danger'>*</span></label>
+                                                <input value={firstName} onChange={(e) => setfirstName(e.target.value)}
+                                                       type="text" className="form-control" name="efname" id="efname"
+                                                       placeholder="Ex: John" required/>
                                             </div>
                                         </div>
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <label >Lastname <span className='text-danger'>*</span></label>
-                                                <input value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" className="form-control" name="elname" id="elname" placeholder="Ex: Doe" required />
+                                                <label>Lastname <span className='text-danger'>*</span></label>
+                                                <input value={lastName} onChange={(e) => setLastName(e.target.value)}
+                                                       type="text" className="form-control" name="elname" id="elname"
+                                                       placeholder="Ex: Doe" required/>
                                             </div>
                                         </div>
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <label >Email address <span className='text-danger'>*</span></label>
-                                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" name="eemail" id="eemail" placeholder="Ex: email@example.com" required />
+                                                <label>Email address <span className='text-danger'>*</span></label>
+                                                <input value={email} onChange={(e) => setEmail(e.target.value)}
+                                                       type="email" className="form-control" name="eemail" id="eemail"
+                                                       placeholder="Ex: email@example.com" required/>
                                             </div>
                                         </div>
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <label >Password <span className='text-danger'>*</span></label>
-                                                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control" name="epassword" id="epassword" placeholder="Password" />
+                                                <label>Password <span className='text-danger'>*</span></label>
+                                                <input value={password} onChange={(e) => setPassword(e.target.value)}
+                                                       type="password" className="form-control" name="epassword"
+                                                       id="epassword" placeholder="Password"/>
                                             </div>
                                         </div>
 
@@ -270,7 +379,8 @@ function UserDetails(props) {
                     </div>
                 </div>
             </div>
-            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType} handleAlertClose={handleAlertClose} />
+            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType}
+                   handleAlertClose={handleAlertClose}/>
         </div>
     );
 }

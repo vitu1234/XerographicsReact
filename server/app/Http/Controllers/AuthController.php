@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 class AuthController extends Controller
 {
     /**
@@ -89,12 +91,45 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        //get user
+        $user = $this->me()->original;
+        $person = '';
+        if ($user->role == 'admin') {
+            $person = '101';
+
+        } elseif ($user->role == 'manager') {
+            $person = '202';
+        } elseif ($user->role == 'assistant') {
+            $person = '303';
+        }
+
+        //get user branch
+        $userBranch = DB::connection('mysql')->select(
+            'SELECT * 
+                    FROM user_branches
+                    WHERE userid = :user_id
+                    ',
+            [
+                'user_id' => $user->id
+            ]
+        );
+
+        $branch = '';
+
+        if (!empty($userBranch)) {
+            $branch = $userBranch[0]->branch_id;
+        } else {
+            $branch = -1;
+        }
+
         return response()->json([
             'error' => false,
             'message' => 'Login success',
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 100,
+            'person' => $person,
+            'branch' => $branch
         ])->withCookie(cookie('token', $token, 60));
 
     }

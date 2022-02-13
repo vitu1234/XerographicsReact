@@ -187,6 +187,9 @@ Route::get('/fetchAllBranchSales', ['App\Http\Controllers\InvoiceController', 'f
 Route::resource('reports/user', 'App\Http\Controllers\SalesReportsController');
 // filter user sales
 Route::post('/filterUserReports', ['App\Http\Controllers\SalesReportsController', 'filterUserReports'])->name('filterUserReports');
+Route::post('/filterBranchReports', ['App\Http\Controllers\SalesReportsController', 'filterBranchReports'])->name('filterBranchReports');
+Route::post('/filterCategoryReports', ['App\Http\Controllers\SalesReportsController', 'filterCategoryReports'])->name('filterCategoryReports');
+Route::get('/invoice_details/{invoice_id}', ['App\Http\Controllers\SalesReportsController', 'invoice_details'])->name('invoice_details');
 
 // filter branch sales
 Route::get('reports/branch', ['App\Http\Controllers\SalesReportsController', 'branch_reports'])->name('branch_reports');

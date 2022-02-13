@@ -29,12 +29,17 @@ import AddBrand from './components/brands/AddBrand';
 import BrandDetails from './components/brands/BrandDetails';
 import Pos from './components/pos/Pos';
 import Login from "./components/Login/Login";
+import {UserSales} from "./components/reports/user/UserSales";
+import {CategorySales} from "./components/reports/category/CategorySales";
+import {BranchSales} from "./components/reports/branch/BranchSales";
+import InvoiceDetails from "./components/reports/details/InvoiceDetails";
+import Logout from "./components/Login/Logout";
 
 function App() {
     const navigate = useNavigate()
 
     const checkLoginStatus = () => {
-        api.get('/api/auth/user'
+        api.get('/auth/user'
             , {
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,12 +60,12 @@ function App() {
 
             })
             .catch(function (error) {
-                sessionStorage.removeItem('status')
-                sessionStorage.removeItem('jwt_token')
+
                 if (error.response.status === 401) {
                     //place your reentry code
                     console.log('Unauthorised')
-                    window.sessionStorage.setItem('status', false)
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
                 } else {
                     console.log('unknown error')
                     window.sessionStorage.setItem('status', false)
@@ -92,6 +97,8 @@ function App() {
 
                         <Route path='/login'
                                element={<Login/>}/>
+                        <Route path='/logout'
+                               element={<Logout/>}/>
 
                         <Route path='/' element={<Dashboard/>}/>
 
@@ -132,6 +139,12 @@ function App() {
 
                         {/* Point of Sale */}
                         <Route path='/pos' element={<Pos/>}/>
+
+                        {/*  reports route  */}
+                        <Route path='/reports/user' element={<UserSales/>}/>
+                        <Route path='/reports/branch' element={<BranchSales/>}/>
+                        <Route path='/reports/category' element={<CategorySales/>}/>
+                        <Route path='/reports/user/view_invoice/:id' element={<InvoiceDetails/>}/>
 
 
                     </Routes>

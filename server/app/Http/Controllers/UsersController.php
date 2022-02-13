@@ -42,11 +42,38 @@ class UsersController extends Controller
     {
         // echo "df";
         // $me = auth()->user()->id; //get users except me
-        $me = 1; //get users except me
-        $users = User::where('id', '!=', $me)->get();
+        $id = auth()->user()->id; //get users except me
+        $role = auth()->user()->role; //get users except me
+
+        //get admin role
+        if ($role === 'admin') {
+            $users = DB::connection('mysql')->select(
+                'SELECT * 
+                    FROM users
+                    WHERE id != :user_id
+                    ',
+                [
+                    'user_id' => $id
+                ]
+            );
+        } else {
+            $users = DB::connection('mysql')->select(
+                'SELECT * 
+                    FROM users
+                    WHERE id != :user_id
+                    AND role != :role
+                    ',
+                [
+                    'user_id' => $id,
+                    'role' => 'admin'
+                ]
+            );
+        }
+
+
         $output = '';
 
-        if ($users->count() > 0) {
+        if (count($users) > 0) {
             $data = array(
                 'error' => false,
                 'message' => 'success',

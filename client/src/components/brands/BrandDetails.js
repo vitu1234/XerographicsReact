@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from "../../api/api";
 import Alert from "../alerts/alert";
 import LinearProgressLoad from "../alerts/LinearProgress";
