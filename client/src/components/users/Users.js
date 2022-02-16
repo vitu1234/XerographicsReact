@@ -125,11 +125,27 @@ function Users() {
                     }
 
                 })
-                .catch(function (myJson) {
-                    console.log(myJson);
-                    setAlertType('error')
-                    setAlertMessage("Error 500: Internal server error")
-                    setOpen(true)
+                .catch(function (error) {
+                    setLoadingProgress(false)
+                    console.log(error);
+
+
+                    if (error.response.status === 401) {
+                        navigate('/login')
+                        //place your reentry code
+                        console.log('Unauthorised')
+                        sessionStorage.removeItem('status')
+                        sessionStorage.removeItem('jwt_token')
+                        setAlertType('error')
+                        setAlertMessage("Error 401: Unauthorised user")
+                        setOpen(true)
+                    } else {
+                        console.log('unknown error')
+                        window.sessionStorage.setItem('status', false)
+                        setAlertType('error')
+                        setAlertMessage("Error 500: Internal server error")
+                        setOpen(true)
+                    }
                 });
         } else {
 
@@ -194,8 +210,8 @@ function Users() {
                         <div className="card">
                             {loading()}
                             <div className="table-responsive mt-4" id="">
-                                <table className="table table-hover mt-3 " id="users_tbl">
-                                    <thead className="thead">
+                                <table className="table align-items-center table-flush table-hover mt-1" id="units_tbl">
+                                    <thead className="thead-light">
                                     <tr>
                                         <th>Fullname</th>
                                         <th>Email</th>

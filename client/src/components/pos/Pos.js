@@ -182,10 +182,25 @@ function Pos() {
             })
             .catch(function (error) {
                 setLoadingProgress(false)
+                console.log(error);
 
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error")
-                setOpen(true)
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
@@ -213,10 +228,25 @@ function Pos() {
             })
             .catch(function (error) {
                 setLoadingProgress(false)
+                console.log(error);
 
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error on categories")
-                setOpen(true)
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
@@ -242,6 +272,26 @@ function Pos() {
 
             })
             .catch(function (error) {
+                setLoadingProgress(false)
+                console.log(error);
+
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
@@ -266,6 +316,26 @@ function Pos() {
 
             })
             .catch(function (error) {
+                setLoadingProgress(false)
+                console.log(error);
+
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
@@ -318,9 +388,24 @@ function Pos() {
             .catch(function (error) {
                 setLoadingProgress(false)
                 console.log(error);
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error")
-                setOpen(true)
+
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 

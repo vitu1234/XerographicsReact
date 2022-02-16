@@ -80,11 +80,25 @@ function AddBrand(props) {
             })
             .catch(function (error) {
                 setLoadingProgress(false)
-
                 console.log(error);
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error")
-                setOpen(true)
+
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
@@ -110,7 +124,7 @@ function AddBrand(props) {
                                     <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                         <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
                                             <li className="breadcrumb-item"><Link to={"/"}><i className="fas fa-home"></i></Link></li>
-                                            <li className="breadcrumb-item active" aria-current="page"><Link to={'products/product_brands'}>Product Brands</Link></li>
+                                            <li className="breadcrumb-item active" aria-current="page"><Link to={'/products/product_brands'}>Product Brands</Link></li>
                                             <li className="breadcrumb-item active" aria-current="page">Add Brand</li>
                                         </ol>
                                     </nav>

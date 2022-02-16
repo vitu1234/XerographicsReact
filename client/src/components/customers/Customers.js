@@ -1,13 +1,16 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from 'react';
 import React from "react";
 import CustomerListRow from "./CustomerListRow";
 import api from "../../api/api";
 import Alert from "../alerts/alert";
 import Dialogs from "../alerts/dialog";
+import LinearProgressLoad from "../alerts/LinearProgress";
 
 
 function Customers() {
+    const navigate = useNavigate();
+
     //user state
     const [customers, setCustomers] = useState([])
     const [del_id, setId] = useState(-1)
@@ -16,6 +19,7 @@ function Customers() {
     const [open, setOpen] = useState(false);
     //dialog state
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [loadingProgress, setLoadingProgress] = useState(false);
 
 
     //dialog open
@@ -52,6 +56,7 @@ function Customers() {
         api.get('/fetchAllCustomers'
         )
             .then(function (response) {
+                setLoadingProgress(false)
                 // console.log(response.data)
                 if (response.data.error === false) {
 
@@ -69,9 +74,22 @@ function Customers() {
 
             })
             .catch(function (error) {
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error")
-                setOpen(true)
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
@@ -84,6 +102,7 @@ function Customers() {
             api.delete('/deleteCustomer/' + del_id + ''
             )
                 .then(function (response) {
+                    setLoadingProgress(false)
                     // console.log(response.data)
                     if (response.data.error === false) {
 
@@ -106,11 +125,27 @@ function Customers() {
                     }
 
                 })
-                .catch(function (myJson) {
-                    console.log(myJson);
-                    setAlertType('error')
-                    setAlertMessage("Error 500: Internal server error")
-                    setOpen(true)
+                .catch(function (error) {
+                    setLoadingProgress(false)
+                    console.log(error);
+
+
+                    if (error.response.status === 401) {
+                        navigate('/login')
+                        //place your reentry code
+                        console.log('Unauthorised')
+                        sessionStorage.removeItem('status')
+                        sessionStorage.removeItem('jwt_token')
+                        setAlertType('error')
+                        setAlertMessage("Error 401: Unauthorised user")
+                        setOpen(true)
+                    } else {
+                        console.log('unknown error')
+                        window.sessionStorage.setItem('status', false)
+                        setAlertType('error')
+                        setAlertMessage("Error 500: Internal server error")
+                        setOpen(true)
+                    }
                 });
         } else {
 
@@ -128,6 +163,15 @@ function Customers() {
                              getDeleteCustomerId={handleClickOpen}></CustomerListRow>
         );
     })
+    const loading = () => {
+        if (loadingProgress) {
+            return (
+                <div className="mb-3">
+                    <LinearProgressLoad />
+                </div>
+            )
+        }
+    }
 
     return (
         <div className="">
@@ -165,10 +209,10 @@ function Customers() {
                 <div className="row">
                     <div className="col">
                         <div className="card">
-
+                            {loading()}
                             <div className="table-responsive mt-4" id="">
-                                <table className="table table-hover mt-3 " id="users_tbl">
-                                    <thead className="thead">
+                                <table className="table align-items-center table-flush table-hover mt-1" id="units_tbl">
+                                    <thead className="thead-light">
                                     <tr>
                                         <th>Fullname</th>
                                         <th>Phone</th>

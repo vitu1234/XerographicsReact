@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\ProductBrand;
 use App\Models\Branch;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductBrand;
 use App\Models\Unit;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage; //helps with deleting files
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+//helps with deleting files
 
 class ProductController extends Controller
 {
@@ -45,8 +47,13 @@ class ProductController extends Controller
     // handle fetch all products ajax request
     public function fetchAllProducts()
     {
-        $products = DB::connection('mysql')->select(
-            'SELECT products.id, products.category_id, products.unit_id, products.branch_id, products.brand_id,
+        $id = auth()->user()->id; //get users except me
+        $role = auth()->user()->role; //get users except me
+
+        //get admin role
+        if ($role === 'admin') {
+            $products = DB::connection('mysql')->select(
+                'SELECT products.id, products.category_id, products.unit_id, products.branch_id, products.brand_id,
                     products.product_code, products.product_serial, products.product_name, products.product_qty,
                     products.product_price, products.product_notes, products.product_status, products.img_url,  
                     categories.category_name, units.unit_name, units.unit_symbol, branches.branch_name, branches.email,
@@ -64,11 +71,54 @@ class ProductController extends Controller
                JOIN  products_brand 
                ON products.brand_id = products_brand.id  
                     '
-        );
+            );
+
+        } else {
+            $user_branch = DB::connection('mysql')->select(
+                'SELECT * 
+                    FROM user_branches 
+                    WHERE userid = :user_id
+                    ',
+                [
+                    'user_id' => $id,
+                ]
+            );
+
+            $user_branch_id = $user_branch[0]->branch_id;
+
+
+            $products = DB::connection('mysql')->select(
+                'SELECT products.id, products.category_id, products.unit_id, products.branch_id, products.brand_id,
+                    products.product_code, products.product_serial, products.product_name, products.product_qty,
+                    products.product_price, products.product_notes, products.product_status, products.img_url,  
+                    categories.category_name, units.unit_name, units.unit_symbol, branches.branch_name, branches.email,
+                    branches.phone, products_brand.brand_name
+                    FROM products
+               JOIN categories
+               ON products.category_id = categories.id
+               
+               JOIN units
+               ON products.unit_id = units.id
+               
+               JOIN branches
+               ON products.branch_id = branches.id
+               
+               JOIN  products_brand 
+               ON products.brand_id = products_brand.id 
+               
+               WHERE products.branch_id = :branch_id 
+                    ',
+                [
+                    'branch_id' => $user_branch_id,
+                ]
+            );
+
+        }
+
 
         if (!empty($products)) {
             $data = array(
-                'status'=>200,
+                'status' => 200,
                 'error' => false,
                 'message' => 'success',
                 'products' => $products,
@@ -77,7 +127,7 @@ class ProductController extends Controller
             return response()->json($data, 200);
         } else {
             $data = array(
-                'status'=>200,
+                'status' => 200,
                 'error' => true,
                 'message' => 'No products found!',
             );
@@ -105,8 +155,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
-
 
 
         //create product
@@ -168,7 +216,7 @@ class ProductController extends Controller
             'SELECT 
                     *FROM products
               WHERE product_code =:product_code
-                    ',[
+                    ', [
                 'product_code' => $request->input('product_code')
             ]
         );
@@ -180,23 +228,22 @@ class ProductController extends Controller
             if ($product->save()) {
 
 
-
                 return response()->json([
                     'status' => 200,
-                    'error'=>false,
+                    'error' => false,
                     'message' => 'Product saved successfully'
                 ]);
             } else {
                 return response()->json([
                     'status' => 500,
-                    'error'=>true,
+                    'error' => true,
                     'message' => 'Product saving failed, Internal server error'
                 ]);
             }
         } else {
             return response()->json([
                 'status' => 500,
-                'error'=>true,
+                'error' => true,
                 'message' => 'Product with same product code already exists'
             ]);
         }
@@ -387,12 +434,13 @@ class ProductController extends Controller
         //
     }
 
-    public function showImage($id){
-        $product =Product::find($id);
+    public function showImage($id)
+    {
+        $product = Product::find($id);
 //        print_r($product);
 //        echo asset("storage/TeacherImages/{$teacher->profilePic}")
-        $path = asset('storage/product_images/'.$product->img_url);
-        echo "PATH: ".$path;
+        $path = asset('storage/product_images/' . $product->img_url);
+        echo "PATH: " . $path;
     }
 
     /**
@@ -448,24 +496,24 @@ class ProductController extends Controller
             $product->branch_id = $request->input('ebranch_id');
         }
 
-        if (!empty($product)){
+        if (!empty($product)) {
             if ($product->save()) {
                 return response()->json([
                     'status' => 200,
-                    'error'=>false,
+                    'error' => false,
                     'message' => 'Product updated successfully'
                 ]);
             } else {
                 return response()->json([
                     'status' => 500,
-                    'error'=>true,
+                    'error' => true,
                     'message' => 'Product updating failed, Internal server error'
                 ]);
             }
-        }else{
+        } else {
             return response()->json([
                 'status' => 500,
-                'error'=>true,
+                'error' => true,
                 'message' => 'Product updating failed, product not found'
             ]);
         }
@@ -482,7 +530,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        if (!empty($product)){
+        if (!empty($product)) {
             if ($product->img_url != 'noimage.jpg') {
                 //delete image
                 Storage::delete('/' . $product->img_url);
@@ -490,20 +538,20 @@ class ProductController extends Controller
             if ($product->delete()) {
                 return response()->json([
                     'status' => 200,
-                    'error'=>false,
+                    'error' => false,
                     'message' => 'Product has been deleted'
                 ]);
             } else {
                 return response()->json([
                     'status' => 500,
-                    'error'=>true,
+                    'error' => true,
                     'message' => 'Product deleting failed, Internal server error'
                 ]);
             }
-        }else{
+        } else {
             return response()->json([
                 'status' => 500,
-                'error'=>true,
+                'error' => true,
                 'message' => 'Product deleting failed, product not found'
             ]);
         }

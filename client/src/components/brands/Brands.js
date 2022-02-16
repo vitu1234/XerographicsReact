@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from 'react';
 import React from "react";
 import BrandListRow from "./BrandListRow";
@@ -9,6 +9,7 @@ import Dialogs from "../alerts/dialog";
 import LinearProgressLoad from "../alerts/LinearProgress";
 
 function Brands() {
+    const navigate = useNavigate()
     //user state
     const [brands, setBrands] = useState([])
     const [del_id, setId] = useState(-1)
@@ -119,13 +120,27 @@ function Brands() {
                     }
 
                 })
-                .catch(function (myJson) {
+                .catch(function (error) {
                     setLoadingProgress(false)
+                    console.log(error);
 
-                    console.log(myJson);
-                    setAlertType('error')
-                    setAlertMessage("Error 500: Internal server error")
-                    setOpen(true)
+
+                    if (error.response.status === 401) {
+                        navigate('/login')
+                        //place your reentry code
+                        console.log('Unauthorised')
+                        sessionStorage.removeItem('status')
+                        sessionStorage.removeItem('jwt_token')
+                        setAlertType('error')
+                        setAlertMessage("Error 401: Unauthorised user")
+                        setOpen(true)
+                    } else {
+                        console.log('unknown error')
+                        window.sessionStorage.setItem('status', false)
+                        setAlertType('error')
+                        setAlertMessage("Error 500: Internal server error")
+                        setOpen(true)
+                    }
                 });
         } else {
 
@@ -190,8 +205,8 @@ function Brands() {
                         <div className="card">
                             {loading()}
                             <div className="table-responsive mt-4" id="">
-                                <table className="table table-hover mt-3 " id="users_tbl">
-                                    <thead className="thead">
+                                <table className="table align-items-center table-flush table-hover mt-1" id="units_tbl">
+                                    <thead className="thead-light">
                                     <tr>
                                         <th>Brand Name</th>
 

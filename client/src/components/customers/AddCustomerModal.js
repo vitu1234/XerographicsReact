@@ -8,11 +8,13 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import api from "../../api/api";
 import Alert from "../alerts/alert";
-import { useEffect, useState } from 'react';
-
+import {useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import LinearProgressLoad from "../alerts/LinearProgress";
 
 
 export default function AddCustomerModal(props) {
+    const navigate = useNavigate();
 
     // console.log(props)
 
@@ -22,6 +24,8 @@ export default function AddCustomerModal(props) {
 
     const [alertType, setAlertType] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
+    const [loadingProgress, setLoadingProgress] = useState(false);
+
 
     const handleAlertClose = () => {
         setOpen(false);
@@ -64,6 +68,7 @@ export default function AddCustomerModal(props) {
             , state
         )
             .then(function (response) {
+                setLoadingProgress(false)
                 // console.log(response.data)
                 if (response.data.error == false) {
 
@@ -87,21 +92,46 @@ export default function AddCustomerModal(props) {
 
             })
             .catch(function (error) {
+                setLoadingProgress(false)
                 console.log(error);
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error")
-                setOpen(true)
+
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
 
-
+    const loading = () => {
+        if (loadingProgress) {
+            return (
+                <div className="mb-3">
+                    <LinearProgressLoad/>
+                </div>
+            )
+        }
+    }
     return (
         <div>
 
             <Dialog open={props.dialogOpen} onClose={props.handleDialogClose}>
                 <DialogTitle>Add Customer</DialogTitle>
                 <DialogContent>
+                    {loading()}
                     <form onSubmit={addCustomer}>
 
 
@@ -110,24 +140,28 @@ export default function AddCustomerModal(props) {
 
                             <div className="col-md-6">
                                 <div className="form-group">
-                                    <label >Customer Name <span className='text-danger'>*</span></label>
-                                    <input value={customer_name} onChange={(e) => setName(e.target.value)} type="text" className="form-control" name="efname" id="efname" placeholder="Ex: John" required />
+                                    <label>Customer Name <span className='text-danger'>*</span></label>
+                                    <input value={customer_name} onChange={(e) => setName(e.target.value)} type="text"
+                                           className="form-control" name="efname" id="efname" placeholder="Ex: John"
+                                           required/>
                                 </div>
                             </div>
 
                             <div className="col-md-6">
                                 <div className="form-group">
-                                    <label >Customer Phone <span className='text-danger'>*</span></label>
-                                    <input value={customer_phone} onChange={(e) => setPhone(e.target.value)} type="text" className="form-control" name="elname" id="elname" placeholder="Ex: +26588299292" required />
+                                    <label>Customer Phone <span className='text-danger'>*</span></label>
+                                    <input value={customer_phone} onChange={(e) => setPhone(e.target.value)} type="text"
+                                           className="form-control" name="elname" id="elname"
+                                           placeholder="Ex: +26588299292" required/>
                                 </div>
                             </div>
 
 
-
                             <div className="col-md-12">
                                 <div className="form-group">
-                                    <label >Address</label>
-                                    <textarea value={address} onChange={(e) => setAddress(e.target.value)} className="form-control" placeholder="Ex: Area 25 sector 3" ></textarea>
+                                    <label>Address</label>
+                                    <textarea value={address} onChange={(e) => setAddress(e.target.value)}
+                                              className="form-control" placeholder="Ex: Area 25 sector 3"></textarea>
                                 </div>
                             </div>
 
@@ -135,13 +169,16 @@ export default function AddCustomerModal(props) {
 
                         <div className="modal-footer">
                             <button type="submit" id="btn_add" className="btn btn-primary">Save</button>
-                            <button onClick={props.handleDialogClose} type="button" id="btn_add" className="btn btn-secondary">Close</button>
+                            <button onClick={props.handleDialogClose} type="button" id="btn_add"
+                                    className="btn btn-secondary">Close
+                            </button>
                         </div>
 
                     </form>
                 </DialogContent>
             </Dialog>
-            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType} handleAlertClose={handleAlertClose} />
+            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType}
+                   handleAlertClose={handleAlertClose}/>
 
         </div>
     );

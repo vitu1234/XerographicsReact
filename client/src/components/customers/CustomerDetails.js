@@ -1,7 +1,8 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import {Link, useNavigate, useLocation} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
 import api from "../../api/api";
 import Alert from "../alerts/alert";
+import LinearProgressLoad from "../alerts/LinearProgress";
 
 
 function CustomerDetails(props) {
@@ -15,6 +16,7 @@ function CustomerDetails(props) {
     //alert state
     const [open, setOpen] = useState(false);
     //dialog state
+    const [loadingProgress, setLoadingProgress] = useState(false);
 
     const [alertType, setAlertType] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
@@ -61,6 +63,7 @@ function CustomerDetails(props) {
             , state
         )
             .then(function (response) {
+                setLoadingProgress(false)
                 // console.log(response.data)
                 if (response.data.error == false) {
 
@@ -69,7 +72,9 @@ function CustomerDetails(props) {
                     setAlertType('success')
                     setAlertMessage(response.data.message)
                     setOpen(true)
-                    setTimeout(() => { navigate('/customers'); }, 1000)
+                    setTimeout(() => {
+                        navigate('/customers');
+                    }, 1000)
 
                 } else {
                     // console.log(response.data.message)
@@ -81,11 +86,36 @@ function CustomerDetails(props) {
 
             })
             .catch(function (error) {
+                setLoadingProgress(false)
                 console.log(error);
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error")
-                setOpen(true)
+
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
+    }
+    const loading = () => {
+        if (loadingProgress) {
+            return (
+                <div className="mb-3">
+                    <LinearProgressLoad/>
+                </div>
+            )
+        }
     }
 
 
@@ -99,10 +129,15 @@ function CustomerDetails(props) {
                                 <div className="col-lg-6 col-7">
                                     <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                         <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                            <li className="breadcrumb-item"><a href="/"><i className="fas fa-home"></i></a></li>
-                                            <li className="breadcrumb-item active" aria-current="page"><Link to={'/users'}>Users</Link></li>
-                                            <li className="breadcrumb-item active" aria-current="page"><Link to={'/customers'}>Customers</Link></li>
-                                            <li className="breadcrumb-item active" aria-current="page">Edit Customer Details</li>
+                                            <li className="breadcrumb-item"><a href="/"><i className="fas fa-home"></i></a>
+                                            </li>
+                                            <li className="breadcrumb-item active" aria-current="page"><Link
+                                                to={'/users'}>Users</Link></li>
+                                            <li className="breadcrumb-item active" aria-current="page"><Link
+                                                to={'/customers'}>Customers</Link></li>
+                                            <li className="breadcrumb-item active" aria-current="page">Edit Customer
+                                                Details
+                                            </li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -118,33 +153,40 @@ function CustomerDetails(props) {
                     <div className="col">
                         <div className="card">
                             <div className="container-fluid mt-5">
+                                {loading()}
                                 <form onSubmit={updateCustomer}>
 
-                                    <input type="hidden" name="ecustomer_id" id="ecustomer_id" value={customer.id} required />
+                                    <input type="hidden" name="ecustomer_id" id="ecustomer_id" value={customer.id}
+                                           required/>
 
                                     <div className="row">
 
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <label >Customer Name <span className='text-danger'>*</span></label>
-                                                <input value={customer_name} onChange={(e) => setName(e.target.value)} type="text" className="form-control" name="efname" id="efname" placeholder="Ex: John" required />
+                                                <label>Customer Name <span className='text-danger'>*</span></label>
+                                                <input value={customer_name} onChange={(e) => setName(e.target.value)}
+                                                       type="text" className="form-control" name="efname" id="efname"
+                                                       placeholder="Ex: John" required/>
                                             </div>
                                         </div>
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <label >Customer Phone <span className='text-danger'>*</span></label>
-                                                <input value={customer_phone} onChange={(e) => setPhone(e.target.value)} type="text" className="form-control" name="elname" id="elname" placeholder="Ex: +26588299292" required />
+                                                <label>Customer Phone <span className='text-danger'>*</span></label>
+                                                <input value={customer_phone} onChange={(e) => setPhone(e.target.value)}
+                                                       type="text" className="form-control" name="elname" id="elname"
+                                                       placeholder="Ex: +26588299292" required/>
                                             </div>
                                         </div>
 
 
-
                                         <div className="col-md-12">
                                             <div className="form-group">
-                                                <label >Address</label>
-                                                <textarea value={address} onChange={(e) => setAddress(e.target.value)} className="form-control" placeholder="Ex: Area 25 sector 3" ></textarea>
+                                                <label>Address</label>
+                                                <textarea value={address} onChange={(e) => setAddress(e.target.value)}
+                                                          className="form-control"
+                                                          placeholder="Ex: Area 25 sector 3"></textarea>
                                             </div>
                                         </div>
 
@@ -160,7 +202,8 @@ function CustomerDetails(props) {
                     </div>
                 </div>
             </div>
-            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType} handleAlertClose={handleAlertClose} />
+            <Alert openAlert={open} alertMessage={alertMessage} alertType={alertType}
+                   handleAlertClose={handleAlertClose}/>
         </div>
     );
 }

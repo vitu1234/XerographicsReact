@@ -206,8 +206,8 @@ function Branches() {
                         <div className="card">
                             {loading()}
                             <div className="table-responsive mt-4" id="">
-                                <table className="table table-hover mt-3 " id="users_tbl">
-                                    <thead className="thead">
+                                <table className="table align-items-center table-flush table-hover mt-1" id="units_tbl">
+                                    <thead className="thead-light">
                                     <tr>
                                         <th>Branch Name</th>
                                         <th>Phone</th>

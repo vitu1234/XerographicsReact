@@ -50,7 +50,9 @@ class UsersController extends Controller
             $users = DB::connection('mysql')->select(
                 'SELECT * 
                     FROM users
-                    WHERE id != :user_id
+                    LEFT JOIN user_branches 
+                    ON users.id = user_branches.userid  
+                    WHERE users.id != :user_id
                     ',
                 [
                     'user_id' => $id
@@ -60,7 +62,9 @@ class UsersController extends Controller
             $users = DB::connection('mysql')->select(
                 'SELECT * 
                     FROM users
-                    WHERE id != :user_id
+                    LEFT JOIN user_branches 
+                    ON users.id = user_branches.userid  
+                    WHERE users.id != :user_id
                     AND role != :role
                     ',
                 [

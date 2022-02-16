@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from 'react';
 import React from "react";
 import CategoryListRow from "./CategoryListRow";
@@ -9,6 +9,7 @@ import LinearProgressLoad from "../alerts/LinearProgress";
 
 
 function Categories() {
+    const navigate = useNavigate()
     //user state
     const [categories, setCategories] = useState([])
     const [del_id, setId] = useState(-1)
@@ -77,10 +78,25 @@ function Categories() {
             })
             .catch(function (error) {
                 setLoadingProgress(false)
+                console.log(error);
 
-                setAlertType('error')
-                setAlertMessage("Error 500: Internal server error")
-                setOpen(true)
+
+                if (error.response.status === 401) {
+                    navigate('/login')
+                    //place your reentry code
+                    console.log('Unauthorised')
+                    sessionStorage.removeItem('status')
+                    sessionStorage.removeItem('jwt_token')
+                    setAlertType('error')
+                    setAlertMessage("Error 401: Unauthorised user")
+                    setOpen(true)
+                } else {
+                    console.log('unknown error')
+                    window.sessionStorage.setItem('status', false)
+                    setAlertType('error')
+                    setAlertMessage("Error 500: Internal server error")
+                    setOpen(true)
+                }
             });
     }
 
@@ -117,12 +133,27 @@ function Categories() {
                     }
 
                 })
-                .catch(function (myJson) {
+                .catch(function (error) {
                     setLoadingProgress(false)
-                    console.log(myJson);
-                    setAlertType('error')
-                    setAlertMessage("Error 500: Internal server error")
-                    setOpen(true)
+                    console.log(error);
+
+
+                    if (error.response.status === 401) {
+                        navigate('/login')
+                        //place your reentry code
+                        console.log('Unauthorised')
+                        sessionStorage.removeItem('status')
+                        sessionStorage.removeItem('jwt_token')
+                        setAlertType('error')
+                        setAlertMessage("Error 401: Unauthorised user")
+                        setOpen(true)
+                    } else {
+                        console.log('unknown error')
+                        window.sessionStorage.setItem('status', false)
+                        setAlertType('error')
+                        setAlertMessage("Error 500: Internal server error")
+                        setOpen(true)
+                    }
                 });
         } else {
 
@@ -187,8 +218,8 @@ function Categories() {
                         <div className="card">
                             {loading()}
                             <div className="table-responsive mt-4" id="">
-                                <table className="table table-hover mt-3 " id="users_tbl">
-                                    <thead className="thead">
+                                <table className="table align-items-center table-flush table-hover mt-1" id="units_tbl">
+                                    <thead className="thead-light">
                                     <tr>
                                         <th>Category Name</th>
                                         <th>Category Description</th>

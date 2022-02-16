@@ -1,6 +1,6 @@
 import ProductCard from './ProductCard'
 import Grid from '@mui/material/Grid';
-import Search from './Search';
+import Search from '../incl/Search';
 import { useState } from 'react';
 import React from "react";
 import Alert from '@mui/material/Alert';

@@ -50,8 +50,12 @@ class POSController extends Controller
     // handle fetch all pos products ajax request
     public function fetchAllPosProducts($category)
     {
-        $products = DB::connection('mysql')->select(
-            'SELECT products.id, products.category_id, products.unit_id, products.branch_id, products.brand_id,
+        $id = auth()->user()->id; //get users except me
+        $role = auth()->user()->role; //get users except me
+
+        if ($role === 'admin') {
+            $products = DB::connection('mysql')->select(
+                'SELECT products.id, products.category_id, products.unit_id, products.branch_id, products.brand_id,
                     products.product_code, products.product_serial, products.product_name, products.product_qty,
                     products.product_price, products.product_notes, products.product_status, products.img_url,  
                     categories.category_name, units.unit_name, units.unit_symbol, branches.branch_name, branches.email,
@@ -71,10 +75,53 @@ class POSController extends Controller
                
                WHERE category_id = ?
                     ',
-            [
-                $category
-            ]
-        );
+                [
+                    $category
+                ]
+            );
+        } else {
+
+            $user_branch = DB::connection('mysql')->select(
+                'SELECT * 
+                    FROM user_branches 
+                    WHERE userid = :user_id
+                    ',
+                [
+                    'user_id' => $id,
+                ]
+            );
+
+            $user_branch_id = $user_branch[0]->branch_id;
+            $products = DB::connection('mysql')->select(
+                'SELECT products.id, products.category_id, products.unit_id, products.branch_id, products.brand_id,
+                    products.product_code, products.product_serial, products.product_name, products.product_qty,
+                    products.product_price, products.product_notes, products.product_status, products.img_url,  
+                    categories.category_name, units.unit_name, units.unit_symbol, branches.branch_name, branches.email,
+                    branches.phone, products_brand.brand_name
+                    FROM products
+               JOIN categories
+               ON products.category_id = categories.id
+               
+               JOIN units
+               ON products.unit_id = units.id
+               
+               JOIN branches
+               ON products.branch_id = branches.id
+               
+               JOIN  products_brand 
+               ON products.brand_id = products_brand.id  
+               
+               WHERE category_id = ?
+               AND products.branch_id = ? 
+                    ',
+                [
+                    $category,
+                    $user_branch_id
+                ]
+            );
+
+        }
+
 
         if (!empty($products)) {
             $data = array(
@@ -101,11 +148,7 @@ class POSController extends Controller
     public function fetchAllPosProductsFilter($tt)
     {
 
-        // $products = Product::query()
-        // ->where('product_code','LIKE',"%{$query}%")
-        // ->orWhere('product_serial','LIKE',"%{$query}%")
-        // ->orWhere('product_name','LIKE',"%{$query}%")
-        // ->get();
+
         $user_id = auth()->user()->id;
         $branch_id = UserBranch::where("userid", $user_id)->first()->branch_id;
 
