@@ -1,3 +1,26 @@
+.call-support {
+    display: inline-block;
+    padding: 5px 10px;
+    font-family: Arial;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.support {
+    text-align: right;
+}
+.show-large {
+    display: none;
+}
+@media only screen and (min-width: 767px) {
+    .show-large {
+        display: block;
+    }
+    .show-mobile {
+        display: none;
+    }
+}
+
 .anyClass {
   height:300px;
   overflow-y: scroll;

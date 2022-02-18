@@ -37,6 +37,8 @@ import Logout from "./components/Login/Logout";
 
 function App() {
     const navigate = useNavigate()
+    const [img_url, setImgUrl] = useState('')
+    const [username, setUsername] = useState('')
 
     const checkLoginStatus = () => {
         api.get('/auth/user'
@@ -53,6 +55,8 @@ function App() {
                 if (response.data.status !== 401) {
                     window.sessionStorage.setItem('status', true)
                     console.log('authorised')
+                    setImgUrl(response.data.img_url)
+                    setUsername(response.data.firstname + ' ' + response.data.lastname)
                 } else {
                     console.log('unauthorised')
                     window.sessionStorage.setItem('status', false)
@@ -87,7 +91,7 @@ function App() {
         return (
             <div id="bg-default">
 
-                <TopBar/>
+                <TopBar img_url={img_url} username={username}/>
 
                 <SideBar/>
                 <div className='main-content ss ' id='panel'>

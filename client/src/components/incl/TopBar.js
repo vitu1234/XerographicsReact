@@ -1,6 +1,10 @@
 import {Link} from "react-router-dom";
+import BaseUrl from "../../api/baseUrl";
+import React from "react";
 
-function TopBar() {
+function TopBar(props) {
+     const  img_url = props.img_url
+     const  username = props.username
     return (
         <nav className="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
             <div className="container-fluid">
@@ -33,10 +37,10 @@ function TopBar() {
                                aria-haspopup="true" aria-expanded="false">
                                 <div className="media align-items-center">
                                     <span className="avatar avatar-sm rounded-circle">
-                                        <img alt="Image placeholder" src="/storage/product_images/noimage.jpg"/>
+                                        <img alt="Image placeholder" src={`${BaseUrl}/storage/product_images/${img_url}`}/>
                                     </span>
                                     <div className="media-body  ml-2  d-none d-lg-block">
-                                        <span className="mb-0 text-sm  font-weight-bold">Vitu</span>
+                                        <span className="mb-0 text-sm  font-weight-bold">{username}</span>
                                     </div>
                                 </div>
                             </a>

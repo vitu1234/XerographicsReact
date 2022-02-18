@@ -1,20 +1,35 @@
 import {Link} from "react-router-dom";
+import React from "react";
 
 function SideBar() {
     const user_type = sessionStorage.getItem('app_type')
     //shop assistant
-    if (user_type ==='303'){
+    if (user_type === '303') {
         return (
             // < !--Sidenav -- >
             <nav className="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white"
                  id="sidenav-main">
                 <div className="scrollbar-inner">
+                    <div className='support mt-3'>
+                        <div className="call-support show-mobile">
+                            <div className="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                                 data-target="#sidenav-main">
+                                <div className="sidenav-toggler-inner">
+                                    <i className="text-primary">&#10006;</i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     {/* <!-- Brand --> */}
                     <div className="sidenav-header  align-items-center">
-                        <a className="navbar-brand" href="#">
+                        <Link className="navbar-brand" to={'/'}>
                             <img src="http://xerographics.test/assets/img/brand/logo.png" className="navbar-brand-img"
                                  alt="Logo"/>
-                        </a>
+                        </Link>
+
                     </div>
                     <div className="navbar-inner">
                         {/* <!-- Collapse --> */}
@@ -69,19 +84,33 @@ function SideBar() {
     }
 
     //manager
-    if (user_type === '202'){
+    if (user_type === '202') {
         return (
 
             // < !--Sidenav -- >
             <nav className="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white"
                  id="sidenav-main">
                 <div className="scrollbar-inner">
+                    <div className='support mt-3'>
+                        <div className="call-support show-mobile">
+                            <div className="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                                 data-target="#sidenav-main">
+                                <div className="sidenav-toggler-inner">
+                                    <i className="text-primary">&#10006;</i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     {/* <!-- Brand --> */}
                     <div className="sidenav-header  align-items-center">
-                        <a className="navbar-brand" href="#">
+                        <Link className="navbar-brand" to={'/'}>
                             <img src="http://xerographics.test/assets/img/brand/logo.png" className="navbar-brand-img"
                                  alt="Logo"/>
-                        </a>
+                        </Link>
+
                     </div>
                     <div className="navbar-inner">
                         {/* <!-- Collapse --> */}
@@ -125,7 +154,6 @@ function SideBar() {
                                 </li>
 
 
-
                                 <li className="nav-item">
                                     <Link className="nav-link " to={'/pos'}>
                                         <i className="ni ni-single-02 text-orange"></i>
@@ -134,7 +162,8 @@ function SideBar() {
                                 </li>
 
                                 <li className="nav-item">
-                                    <a data-toggle="collapse" data-target="#collapseList" className="nav-link " href="#">
+                                    <a data-toggle="collapse" data-target="#collapseList" className="nav-link "
+                                       href="#">
                                         <i className="ni ni-books text-primary"></i>
                                         <span className="nav-link-text">Reports</span>
                                     </a>
@@ -206,12 +235,26 @@ function SideBar() {
         <nav className="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white"
              id="sidenav-main">
             <div className="scrollbar-inner">
+                <div className='support mt-3'>
+                    <div className="call-support show-mobile">
+                        <div className="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                             data-target="#sidenav-main">
+                            <div className="sidenav-toggler-inner">
+                                <i className="text-primary">&#10006;</i>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 {/* <!-- Brand --> */}
                 <div className="sidenav-header  align-items-center">
-                    <a className="navbar-brand" href="#">
+                    <Link className="navbar-brand" to={'/'}>
                         <img src="http://xerographics.test/assets/img/brand/logo.png" className="navbar-brand-img"
                              alt="Logo"/>
-                    </a>
+                    </Link>
+
                 </div>
                 <div className="navbar-inner">
                     {/* <!-- Collapse --> */}
@@ -316,8 +359,6 @@ function SideBar() {
                                     <span className="nav-link-text">Settings</span>
                                 </a>
                             </li>
-
-
 
 
                             <li className="nav-item">
