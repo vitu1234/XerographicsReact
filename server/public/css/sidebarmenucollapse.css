@@ -1,0 +1,22 @@
+.sidebar-submenu li {
+  /*padding-left: 25px;*/
+  font-size: 13px;
+  color: dimgrey;
+  text-decoration: none;
+  /*padding: 5px;*/
+}
+.sidebar-submenu  {
+ background: aliceblue;
+}
+.sidebar-submenu ul {
+  list-style-type: none;
+}
+
+.sidebar-submenu li a{
+  height: 100%;
+  color: dimgrey;
+}
+
+.sidebar-submenu li: hover{
+   background-color:#2EA620 !important;
+}

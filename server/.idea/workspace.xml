@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1e54e9d0-ebba-4007-9019-6ca340dd1677" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/013b2c9e8de401bd0f8fd185a4992e7e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/06e66e26492ff3dec280701a3839e0e1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/0846a0043b7aef3e3d8651076fe101f3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/0a6197757acb79e3912ded950e16543e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/13ee4549aca974b48fa673a4c1b6d982.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/19abf10dfc8fdf9725712256ebbce4da.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/21726a35c5010a013a33833a924bf377.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/25912ad08d8cef775417ee30c32fd024.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/25bb89cec0c4bee9caaf0ed0b76a7d42.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/309f245045b7981a06f208d927f6ff47.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/397320425eda6c0dcd15c07c30c923e4.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/43bd4066e2d57ba361779ada8cbb3fb0.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/497a852dc5fb8cd4bf35f35b27cb0440.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/5181630c2bd375504685e9a1db4f5ca5.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/56f2a00a972a7f330791a8ea26844204.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/58c455b820d1b755217635bc38a3c00a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/5bb7d9490f01481067e48bb8351da6b8.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/5f57d04a29f3b325ee590b7c1018ecb8.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/70458b71b69381fc6473de4f4b4f8b4e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/7169bcdeef2423ce3ff27c1c65424aa7.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/76af77393cc699b9f009f41a82aca79d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/77a5061e8fc5746604aee967f53d76cd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/783f2800fcc030e02104d597dc5bf7de.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/7dda282ab6ce47699ac08a98ece9ccb0.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/838a49e1b2f7dc12cca47874605e1a7e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/86d99c91a27d3c22c840ca4abd1eb4f6.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/8e156894eac170aa85a1d37118f5a209.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/9688abd414e270eac6a5293d7bae5ebd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/97a0927def267fb595a3a5245c45e09e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/99e95b9b498eb6ebda71947050f0db59.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/9b431c9d0c03ea2cb4df9ff65ec470cc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/9ff6144d48f632256a8e3c7df4e7cd44.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/a66a6185668e8e31314cde378c2ec13a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/ad7defa90823eedd0a630ff782eff367.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/ae9ad4954e529768a59ff7c35d7620d5.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/b2928cd03f4e9d1f4c2d454b7a92b4b5.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/b8e1fd4e6e89adaaec79a40636206008.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/c03de53c51abb0a02d6955ed5385b596.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/c07762d5e60fb91d7db382267fd90e2a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/c8c19247766291c3e832c5bf0fffc27c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/ca88918536c7d4f1d815c36ecdfebf35.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/ce80d04751f1859e7628011ff95082cf.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/d3b1682265a424b38cbbeb0868ccf858.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/e4ce62b533ef8c096046c2d6abe8d271.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/e70c632f4c68124a77eecf13afda4c7e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/e83520ce087046d34d4a192044272d10.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/e87797a8de37b02f1b84a9c916733f41.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/ee24a3d6c229e084e312987230935b19.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/f21269bc4bf050bd782e29442c60484a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/f59d3f59a3549bc09f7c9d44ee025f8a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/node_modules/.cache/babel-loader/fe6f4c98fd500b7883898a3ed7a3f212.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/dashboard/GraphLinear.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/0.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/10.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/10.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/12.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/12.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/13.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/13.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/14.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/14.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/16.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/16.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/17.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/17.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/18.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/18.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/19.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/19.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/20.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/20.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/22.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/22.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/23.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/23.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/24.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/24.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/25.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/25.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/26.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/26.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/5.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/5.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/9.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/9.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/index.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/../client/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/dashboard/Analytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/dashboard/Analytics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/dashboard/Dashboard.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/league/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
+      <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
+      <path value="$PROJECT_DIR$/vendor/dflydev/dot-access-data" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sail" />
+      <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/fruitcake/laravel-cors" />
+      <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
+      <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/nette/schema" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/vendor/nette/utils" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/vendor/tymon/jwt-auth" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="22kbYAqYoyganxztK8XawaX5ys9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="cmd" />
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e54e9d0-ebba-4007-9019-6ca340dd1677" name="Default Changelist" comment="" />
+      <created>1640384576781</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640384576781</updated>
+      <workItem from="1640384580502" duration="18912000" />
+      <workItem from="1640552110655" duration="19096000" />
+      <workItem from="1640639247014" duration="13673000" />
+      <workItem from="1641229129038" duration="97000" />
+      <workItem from="1641240760613" duration="19386000" />
+      <workItem from="1641399233681" duration="4232000" />
+      <workItem from="1641405275628" duration="5277000" />
+      <workItem from="1641936020763" duration="1067000" />
+      <workItem from="1642091140340" duration="606000" />
+      <workItem from="1642281034763" duration="1777000" />
+      <workItem from="1642397993061" duration="974000" />
+      <workItem from="1642532389695" duration="993000" />
+      <workItem from="1642937509947" duration="12696000" />
+      <workItem from="1643016822792" duration="710000" />
+      <workItem from="1643032339526" duration="1258000" />
+      <workItem from="1643117346572" duration="291000" />
+      <workItem from="1643117796658" duration="1829000" />
+      <workItem from="1643268578027" duration="687000" />
+      <workItem from="1643341018469" duration="5945000" />
+      <workItem from="1643402978357" duration="14579000" />
+      <workItem from="1643673786389" duration="821000" />
+      <workItem from="1644136423654" duration="592000" />
+      <workItem from="1644167978662" duration="1998000" />
+      <workItem from="1644174981615" duration="1789000" />
+      <workItem from="1644261586276" duration="1304000" />
+      <workItem from="1644349165278" duration="2384000" />
+      <workItem from="1644441910144" duration="4839000" />
+      <workItem from="1644520906705" duration="6917000" />
+      <workItem from="1644594150111" duration="7627000" />
+      <workItem from="1644697773214" duration="7730000" />
+      <workItem from="1644856687578" duration="4419000" />
+      <workItem from="1645013421178" duration="11000" />
+      <workItem from="1645013486944" duration="3000" />
+      <workItem from="1645024798253" duration="1360000" />
+      <workItem from="1645129713452" duration="2621000" />
+      <workItem from="1645164859981" duration="236000" />
+      <workItem from="1645294809325" duration="1330000" />
+      <workItem from="1645473055093" duration="884000" />
+      <workItem from="1645520478629" duration="1910000" />
+      <workItem from="1645847947679" duration="18282000" />
+      <workItem from="1646140082282" duration="4991000" />
+      <workItem from="1646462735582" duration="1324000" />
+      <workItem from="1646587875222" duration="435000" />
+    </task>
+    <task id="LOCAL-00001" summary="changing to api mode">
+      <created>1640544517100</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1640544517100</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="changing to api mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="changing to api mode" />
+  </component>
+</project>

@@ -1,0 +1,36 @@
+.sidebar-submenu li {
+  /*padding-left: 25px;*/
+  font-size: 13px;
+  color: dimgrey;
+  text-decoration: none;
+  /*padding: 5px;*/
+}
+.sidebar-submenu  {
+ background: aliceblue;
+}
+.sidebar-submenu ul {
+  list-style-type: none;
+}
+
+.sidebar-submenu li a{
+  height: 100%;
+  color: dimgrey;
+}
+
+.sidebar-submenu li: hover{
+   background-color:#2EA620 !important;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: orange;        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: blue;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid orange;  /* creates padding around scroll thumb */
+}
