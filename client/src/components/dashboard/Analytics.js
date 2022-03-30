@@ -12,6 +12,7 @@ import {Bar} from 'react-chartjs-2';
 import faker from 'faker';
 import ReportListRow from "../reports/ReportListRow";
 import GraphLinear from "./GraphLinear";
+import {Link} from "react-router-dom";
 
 
 ChartJS.register(
@@ -75,7 +76,6 @@ function Analytics(props) {
             }
         ],
     };
-
 
 
     return (
@@ -144,8 +144,10 @@ function Analytics(props) {
                                         <h3 class="mb-0">Recent Sales</h3>
                                     </div>
                                     <div class="col text-right">
-                                        <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                                        <a href="#!" class="btn btn-sm btn-secondary">Print</a>
+                                        <Link
+                                            to={'/reports/branch'}
+                                            class="btn btn-sm btn-primary">See all</Link>
+                                        {/*<a href="#!" class="btn btn-sm btn-secondary">Print</a>*/}
                                     </div>
                                 </div>
                             </div>

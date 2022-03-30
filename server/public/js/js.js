@@ -37,7 +37,7 @@ function getCookie(name) {
     // These options are needed to round to whole numbers if that's what you want.
     //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
     //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-  }); 
+  });
 
 // ********************************************************************
 // ------------------------------------------------------------------
@@ -111,7 +111,7 @@ function deleteUser(id, fullname){
           })
         }
       },
-      error: function (jqXHR, textStatus, errorThrown) { 
+      error: function (jqXHR, textStatus, errorThrown) {
         var msg = '';
         $("#btn_add").text('Save');
         if (jqXHR.status === 0) {
@@ -231,7 +231,7 @@ $(function() {
      var form_data = $(this).serialize();
 
       $("#editFormBody").validate();//validate the form
-      
+
       $("#btn_editx").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
       url: "/updateUser",
@@ -309,7 +309,7 @@ $(document).on('click', '.editIcon', function(e) {
       $("#editFormBody").html(response);
       $("#_tokend").val(csrf)
     },
-    error: function (jqXHR, textStatus, errorThrown) { 
+    error: function (jqXHR, textStatus, errorThrown) {
       var msg = '';
       $("#btn_add").text('Save');
       if (jqXHR.status === 0) {
@@ -405,7 +405,7 @@ function deleteCustomer(id, fullname){
           })
         }
       },
-      error: function (jqXHR, textStatus, errorThrown) { 
+      error: function (jqXHR, textStatus, errorThrown) {
         var msg = '';
         $("#btn_add").text('Save');
         if (jqXHR.status === 0) {
@@ -445,7 +445,7 @@ $(function() {
      var form_data = $(this).serialize();
 
       $("#addCustomerForm").validate();//validate the form
-      
+
       $("#btn_add").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
       url: "/saveCustomer",
@@ -520,7 +520,7 @@ $(function() {
      var form_data = $(this).serialize();
 
       $("#editCustomerFormBody").validate();//validate the form
-      
+
       $("#btn_editx").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
       url: "/updateCustomer",
@@ -604,7 +604,7 @@ $(document).on('click', '.editCustomerIcon', function(e) {
       $("#editCustomerFormBody").html(response);
       $("#_tokend").val(csrf)
     },
-    error: function (jqXHR, textStatus, errorThrown) { 
+    error: function (jqXHR, textStatus, errorThrown) {
       var msg = '';
       $("#btn_add").text('Save');
       if (jqXHR.status === 0) {
@@ -703,7 +703,7 @@ function deleteUnit(id, unit_name){
           })
         }
       },
-      error: function (jqXHR, textStatus, errorThrown) { 
+      error: function (jqXHR, textStatus, errorThrown) {
         var msg = '';
         $("#btn_add").text('Save');
         if (jqXHR.status === 0) {
@@ -743,7 +743,7 @@ $(function() {
      var form_data = $(this).serialize();
 
       $("#addUnitForm").validate();//validate the form
-      
+
 
       $("#btn_add").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
@@ -806,7 +806,7 @@ $(function() {
      var form_data = $(this).serialize();
 
       $("#editUnitFormBody").validate();//validate the form
-      
+
       $("#btn_editx").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
       url: "/updateUnit",
@@ -884,7 +884,7 @@ $(document).on('click', '.editIconUnit', function(e) {
       $("#editUnitFormBody").html(response);
       $("#_tokend").val(csrf)
     },
-    error: function (jqXHR, textStatus, errorThrown) { 
+    error: function (jqXHR, textStatus, errorThrown) {
       var msg = '';
       $("#btn_add").text('Save');
       if (jqXHR.status === 0) {
@@ -981,7 +981,7 @@ function deleteCategory(id, category_name){
           })
         }
       },
-      error: function (jqXHR, textStatus, errorThrown) { 
+      error: function (jqXHR, textStatus, errorThrown) {
         var msg = '';
         $("#btn_add").text('Save');
         if (jqXHR.status === 0) {
@@ -1021,7 +1021,7 @@ $(function() {
      var form_data = $(this).serialize();
 
       $("#addCategoryForm").validate();//validate the form
-      
+
 
       $("#btn_add").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
@@ -1085,7 +1085,7 @@ $("#editCategoryFormBody").on('submit',function(e){
  var form_data = $(this).serialize();
 
       $("#editCategoryFormBody").validate();//validate the form
-      
+
       $("#btn_editx").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
       url: "/updateCategory",
@@ -1163,7 +1163,7 @@ $(document).on('click', '.editIconCategory', function(e) {
       $("#editCategoryFormBody").html(response);
       $("#_tokend").val(csrf)
     },
-    error: function (jqXHR, textStatus, errorThrown) { 
+    error: function (jqXHR, textStatus, errorThrown) {
       var msg = '';
       $("#btn_add").text('Save');
       if (jqXHR.status === 0) {
@@ -1260,7 +1260,7 @@ function deleteBranch(id, branch_name){
           })
         }
       },
-      error: function (jqXHR, textStatus, errorThrown) { 
+      error: function (jqXHR, textStatus, errorThrown) {
         var msg = '';
         $("#btn_add").text('Save');
         if (jqXHR.status === 0) {
@@ -1300,7 +1300,7 @@ $(function() {
      var form_data = $(this).serialize();
 
       $("#addBranchForm").validate();//validate the form
-      
+
 
       $("#btn_add").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
@@ -1364,7 +1364,7 @@ $("#editBranchFormBody").on('submit',function(e){
  var form_data = $(this).serialize();
 
       $("#editBranchFormBody").validate();//validate the form
-      
+
       $("#btn_editx").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
       url: "/updateBranch",
@@ -1442,7 +1442,7 @@ $(document).on('click', '.editIconBranch', function(e) {
       $("#editBranchFormBody").html(response);
       $("#_tokend").val(csrf)
     },
-    error: function (jqXHR, textStatus, errorThrown) { 
+    error: function (jqXHR, textStatus, errorThrown) {
       var msg = '';
       $("#btn_add").text('Save');
       if (jqXHR.status === 0) {
@@ -1540,7 +1540,7 @@ function deleteProduct(id, product_name){
           })
         }
       },
-      error: function (jqXHR, textStatus, errorThrown) { 
+      error: function (jqXHR, textStatus, errorThrown) {
         var msg = '';
         $("#btn_add").text('Save');
         if (jqXHR.status === 0) {
@@ -1621,7 +1621,7 @@ $(function() {
             })
           }
         },
-        error: function (jqXHR, textStatus, errorThrown) { 
+        error: function (jqXHR, textStatus, errorThrown) {
           var msg = '';
           $("#btn_add").text('Save');
           if (jqXHR.status === 0) {
@@ -1678,7 +1678,7 @@ $("#editProdxuctFormBody").submit(function(e) {
       $("#edit_employee_form")[0].reset();
       $("#editEmployeeModal").modal('hide');
     },
-    error: function (jqXHR, textStatus, exception) { 
+    error: function (jqXHR, textStatus, exception) {
       var msg = '';
       $("#btn_add").text('Save');
       if (jqXHR.status === 0) {
@@ -1727,7 +1727,7 @@ $(document).on('click', '.editIconProduct', function(e) {
       $("#editProductBody").html(response);
       $("#_tokend").val(csrf)
     },
-    error: function (jqXHR, textStatus, errorThrown) { 
+    error: function (jqXHR, textStatus, errorThrown) {
       var msg = '';
       $("#btn_add").text('Save');
       if (jqXHR.status === 0) {
@@ -1825,7 +1825,7 @@ function deleteBrand(id, brand_name){
           })
         }
       },
-      error: function (jqXHR, textStatus, errorThrown) { 
+      error: function (jqXHR, textStatus, errorThrown) {
         var msg = '';
         $("#btn_add").text('Save');
         if (jqXHR.status === 0) {
@@ -1865,7 +1865,7 @@ $(function() {
      var form_data = $(this).serialize();
 
       $("#addBrandForm").validate();//validate the form
-      
+
 
       $("#btn_add").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
@@ -1929,7 +1929,7 @@ $("#editBrandFormBody").on('submit',function(e){
  var form_data = $(this).serialize();
 
       $("#editBrandFormBody").validate();//validate the form
-      
+
       $("#btn_editx").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Saving...');
      $.ajax({ //make ajax request to cart_process.php
       url: "/updateBrand",
@@ -2007,7 +2007,7 @@ $(document).on('click', '.editIconBrand', function(e) {
       $("#editBrandFormBody").html(response);
       $("#_tokend").val(csrf)
     },
-    error: function (jqXHR, textStatus, errorThrown) { 
+    error: function (jqXHR, textStatus, errorThrown) {
       var msg = '';
       $("#btn_add").text('Save');
       if (jqXHR.status === 0) {
@@ -2109,7 +2109,7 @@ function fetchAllPosProductsFilter() {
 
     $("#search_input").focus()
   }
-  
+
 }
 
 //add to cart
@@ -2121,7 +2121,7 @@ function addProductToCart(id, product_name, price,price_formated,tax, instock){
     var total = $("#total_amount").val();
     $("#tax"+id).val(tax)
     // do cookie doesn't exist stuff;
-    var f_total = parseInt(price) + parseInt(total) + parseInt(tax);  
+    var f_total = parseInt(price) + parseInt(total) + parseInt(tax);
 
     $("#total_amount").val(f_total);
     var formated = formatter.format(f_total); /* $2,500.00 */
@@ -2142,7 +2142,7 @@ function removeFromCart(id, price){
     var tax = $("#tax"+id).val()
     var qty = $("#number_qty"+id).val();
     $("#cartProdID" + id).remove();
-    
+
     var total = $("#total_amount").val();
 
     console.log("ID "+id+" TAX "+tax+" PRICE: "+price+" QTY: "+qty)
@@ -2152,7 +2152,7 @@ function removeFromCart(id, price){
     console.log(old_T);
 
     var new_total = parseInt(total)-parseInt(old_T);
-    $("#total_amount").val(new_total)   
+    $("#total_amount").val(new_total)
 
     var formated = formatter.format(new_total); /* $2,500.00 */
     $("#total_txt").html(formated)
@@ -2186,15 +2186,15 @@ function addProductQty(id,price){
     var old_total = $("#total_amount").val(); // => 'value'
     // console.log("oldTotal "+old_total)
 
-    //remove the old price 
+    //remove the old price
     var rm_price = parseInt(old_total) - parseInt(old_sub_total);
     // console.log("rm_price "+rm_price)
 
-    //add subtotal 
+    //add subtotal
     var final_total = parseInt(rm_price) + parseInt(sub_total);
     // console.log("final total "+final_total)
 
-    $("#total_amount").val(final_total)   
+    $("#total_amount").val(final_total)
 
     var formated = formatter.format(final_total); /* $2,500.00 */
     $("#total_txt").html(formated)
@@ -2234,15 +2234,15 @@ function minusProductQty(id,price){
   //update all total
   var old_total = $("#total_amount").val(); // => 'value'
 
-  //remove the old price 
+  //remove the old price
   var rm_price = parseInt(old_total) - parseInt(old_sub_total);
   console.log("rm_price "+rm_price)
 
-  //add subtotal 
+  //add subtotal
   var final_total = parseInt(rm_price) + parseInt(sub_total);
   console.log("final total "+final_total)
 
-  $("#total_amount").val(final_total)   
+  $("#total_amount").val(final_total)
 
   var formated = formatter.format(final_total); /* $2,500.00 */
   $("#total_txt").html(formated)
@@ -2269,7 +2269,7 @@ $("#addSaleForm").on('submit',function(e){
   $("#addSaleForm").validate();//validate the form
   $("#progressStatus").fadeIn();
   $("#progressStatus").html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Please wait...');
-  
+
   var amount_paid_input = $("#amount_paid_input").val();
   if (parseInt(amount_paid_input) !== 0) {
     $.ajax({ //make ajax request to cart_process.php
@@ -2365,7 +2365,7 @@ $("#amount_paid_input").on('input',function(e){
         // after discount
         var after_paid = parseInt(amount_paid_input) - parseInt(total_amount);
 
-      // $("#total_amount").val(final_total)   
+      // $("#total_amount").val(final_total)
 
       var formated = formatter.format(after_paid); /* $2,500.00 */
       $("#change_txt").html(formated);
@@ -2451,7 +2451,7 @@ $("#filterUserReportsForm").on('submit',function(e){
   $("#filterUserReportsForm").validate();//validate the form
 
   var filter_user = $("#filter_user").val();
-  
+
   if (filter_user === '' || filter_user === null) {
     Swal.fire({
       icon: 'error',
@@ -2515,7 +2515,7 @@ $("#filterBranchReportsForm").on('submit',function(e){
   $("#filterBranchReportsForm").validate();//validate the form
 
   var filter_user = $("#filter_branch").val();
-  
+
   if (filter_user === '' || filter_user === null) {
     Swal.fire({
       icon: 'error',
@@ -2579,7 +2579,7 @@ $("#filterCategoryReportsForm").on('submit',function(e){
   $("#filterCategoryReportsForm").validate();//validate the form
 
   var filter_user = $("#filter_branch").val();
-  
+
   if (filter_user === '' || filter_user === null) {
     Swal.fire({
       icon: 'error',

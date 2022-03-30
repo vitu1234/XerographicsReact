@@ -20,6 +20,7 @@ function Dashboard() {
     const [app_type, setAppType] = useState(sessionStorage.getItem('app_type'));
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
+    const [branch_selected, setReportBranch] = useState('');
     const all_months = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 
 
@@ -99,7 +100,9 @@ function Dashboard() {
 
         if (app_type === '101') {
             dashboard_url = '/all/' + d.getFullYear().toString() + '/' + d.getMonth().toString();
+            setReportBranch('all')
         } else {
+            setReportBranch(sessionStorage.getItem('branch'))
             dashboard_url = '/' + sessionStorage.getItem('branch') + '/' + d.getFullYear().toString() + '/' + d.getMonth().toString();
         }
         retrieveDashboard();
@@ -153,10 +156,30 @@ function Dashboard() {
     })
 
 
+    const branchChange = (e) => {
+        dashboard_url = '/' + e.target.value + '/' + year + '/' + month;
+        setReportBranch(e.target.value)
+        retrieveDashboard();
+    }
+
+    const monthChange = (e) => {
+        setMonth(e.target.value);
+        dashboard_url = '/' + branch_selected + '/' + year + '/' + e.target.value;
+        retrieveDashboard();
+    }
+
+    const yearChange = (e) => {
+        setYear(e.target.value);
+        dashboard_url = '/' + branch_selected + '/' + e.target.value + '/' + month;
+        console.log(dashboard_url)
+        retrieveDashboard();
+    }
+
     return (
         <div>
 
             <div className="header bg-primary pb-6">
+                {loading()}
                 <div className="container-fluid">
                     <div className="header-body">
                         <div className="row align-items-center py-4">
@@ -175,7 +198,9 @@ function Dashboard() {
 
                                 <div className="col-md-2"></div>
                                 <div className="">
-                                    <select className="form-control">
+                                    <select onChange={branchChange} className="form-control">
+                                        <option key='all' value='all'>All Branches</option>
+
                                         {renderBranchList}
                                     </select>
                                 </div>
@@ -185,7 +210,7 @@ function Dashboard() {
 
                                 <div className="col-md-2"></div>
                                 <div className="">
-                                    <select className="form-control">
+                                    <select onChange={monthChange} className="form-control">
                                         {renderMonthList}
                                     </select>
                                 </div>
@@ -195,7 +220,7 @@ function Dashboard() {
 
                                 <div className="col-md-2"></div>
                                 <div className="">
-                                    <select className="form-control">
+                                    <select onChange={yearChange} className="form-control">
                                         {renderYearList}
                                     </select>
                                 </div>
@@ -204,7 +229,7 @@ function Dashboard() {
                         </div>
                         {/* <!-- Card stats --> */}
                         <div className="row">
-                            {loading()}
+
                             <div className="col-xl-3 col-md-6">
                                 <div className="card card-stats">
                                     {/* <!-- Card body --> */}
@@ -247,7 +272,7 @@ function Dashboard() {
                                         </div>
                                         <p className="mt-3 mb-0 text-sm">
 
-                                            <span className="text-nowrap">Since day 1</span>
+                                            <span className="text-nowrap">Since day 1 [all branches]</span>
                                         </p>
                                     </div>
                                 </div>
